@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[OrderStatus]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT newid(), 
+    [Name] NVARCHAR(150) NOT NULL,
+	[CreateTime] DATETIME NOT NULL, 
+    [UpdateTime] DATETIME NULL
+)

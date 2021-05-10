@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[OrderDetail]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT newid(), 
+    [OrderId] UNIQUEIDENTIFIER NOT NULL, 
+    [ProductId] UNIQUEIDENTIFIER NOT NULL, 
+    [Quantity] INT NOT NULL, 
+    [Price] DECIMAL(18, 2) NOT NULL, 
+    [CreateTime] DATETIME NOT NULL, 
+    [UpdateTime] DATETIME NULL
+)
