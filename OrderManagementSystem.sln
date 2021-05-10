@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderManagementSystem.API",
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "OrderManagementSystem.Database", "OrderManagementSystem.Database\OrderManagementSystem.Database.sqlproj", "{0386D251-C562-44BB-92DF-3F272C102CF5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManagementSystem.Web", "OrderManagementSystem.Web\OrderManagementSystem.Web.csproj", "{88640F28-81D9-43A7-8E55-27112FE1AC38}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{0386D251-C562-44BB-92DF-3F272C102CF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0386D251-C562-44BB-92DF-3F272C102CF5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0386D251-C562-44BB-92DF-3F272C102CF5}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{88640F28-81D9-43A7-8E55-27112FE1AC38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88640F28-81D9-43A7-8E55-27112FE1AC38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88640F28-81D9-43A7-8E55-27112FE1AC38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88640F28-81D9-43A7-8E55-27112FE1AC38}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

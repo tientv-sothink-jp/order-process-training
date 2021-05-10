@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[Role]
+﻿CREATE TABLE [dbo].[RoleMaster]
 (
 	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT newid(), 
     [Name] NVARCHAR(150) NOT NULL, 

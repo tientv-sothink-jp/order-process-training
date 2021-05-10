@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[OrderStatus]
+﻿CREATE TABLE [dbo].[OrderStatusMaster]
 (
 	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT newid(), 
     [Name] NVARCHAR(150) NOT NULL,
