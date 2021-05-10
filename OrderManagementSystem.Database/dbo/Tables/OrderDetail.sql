@@ -4,7 +4,7 @@
     [OrderId] UNIQUEIDENTIFIER NOT NULL, 
     [ProductId] UNIQUEIDENTIFIER NOT NULL, 
     [Quantity] INT NOT NULL, 
-    [Price] DECIMAL(18, 2) NOT NULL, 
-    [CreateTime] DATETIME NOT NULL, 
-    [UpdateTime] DATETIME NULL
+    [UnitPrice] INT NOT NULL, 
+    [CreatedTime] DATETIME NOT NULL DEFAULT GETDATE(), 
+    [UpdatedTime] DATETIME NULL
 )

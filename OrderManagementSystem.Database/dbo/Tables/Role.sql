@@ -1,7 +1,0 @@
-﻿CREATE TABLE [dbo].[Role]
-(
-	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT newid(), 
-    [Name] NCHAR(10) NOT NULL, 
-    [CreateTime] DATETIME NOT NULL, 
-    [UpdateTime] DATETIME NULL
-)
