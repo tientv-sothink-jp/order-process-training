@@ -71,11 +71,11 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\User.sql" />
-    <Build Include="dbo\Tables\Role.sql" />
+    <Build Include="dbo\Tables\Role.Master.sql" />
     <Build Include="dbo\Tables\UserRole.sql" />
     <Build Include="dbo\Tables\Product.sql" />
     <Build Include="dbo\Tables\Order.sql" />
-    <Build Include="dbo\Tables\OrderStatus.sql" />
+    <Build Include="dbo\Tables\OrderStatus.Master.sql" />
     <Build Include="dbo\Tables\OrderDetail.sql" />
   </ItemGroup>
   <ItemGroup>

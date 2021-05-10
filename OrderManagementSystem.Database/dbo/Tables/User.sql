@@ -4,6 +4,10 @@
     [UserName] NVARCHAR(50) NOT NULL, 
     [Password] NVARCHAR(500) NOT NULL,
     [Name] NVARCHAR(500) NOT NULL,
-    [CreateTime] DATETIME NOT NULL, 
-    [UpdateTime] DATETIME NULL
+    [Phone] CHAR(15) NOT NULL,
+    [Email] CHAR(150) NOT NULL,
+    [Address] NVARCHAR(500) NOT NULL,
+    [IsActive] BIT NOT NULL DEFAULT 1,
+    [CreatedTime] DATETIME NOT NULL DEFAULT GETDATE(), 
+    [UpdatedTime] DATETIME NULL,
 )

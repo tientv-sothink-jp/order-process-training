@@ -1,13 +1,13 @@
 ﻿CREATE TABLE [dbo].[Order]
 (
 	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
-    [DateReceive] DATETIME NOT NULL, 
-    [DateDelivery] NCHAR(10) NOT NULL, 
-    [Discount] INT NOT NULL, 
+    [DateDelivered] DATETIME NULL , 
+    [Discount] DECIMAL(18, 2) NOT NULL, 
     [OrderStatusId] INT NOT NULL, 
-    [CustomerName] INT NOT NULL,
-    [CustomerPhone] INT NOT NULL,
+    [CustomerName] NVARCHAR(250) NOT NULL,
+    [CustomerPhone] CHAR(15) NOT NULL,
+    [CustomerEmail] CHAR(150) NOT NULL,
     [CustomerAddress] NVARCHAR(250) NOT NULL,
-    [CreateTime] DATETIME NOT NULL, 
-    [UpdateTime] DATETIME NULL
+    [CreatedTime] DATETIME NOT NULL DEFAULT GETDATE(), 
+    [UpdatedTime] DATETIME NULL
 )
