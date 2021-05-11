@@ -3,11 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderManagementSystem.API", "OrderManagementSystem.API\OrderManagementSystem.API.csproj", "{36E206AE-D06D-4469-BF37-6D14CC127F87}"
-EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "OrderManagementSystem.Database", "OrderManagementSystem.Database\OrderManagementSystem.Database.sqlproj", "{0386D251-C562-44BB-92DF-3F272C102CF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderManagementSystem.Web", "OrderManagementSystem.Web\OrderManagementSystem.Web.csproj", "{88640F28-81D9-43A7-8E55-27112FE1AC38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderManagementSystem.Web", "OrderManagementSystem.Web\OrderManagementSystem.Web.csproj", "{88640F28-81D9-43A7-8E55-27112FE1AC38}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderManagementSystem.API", "OrderManagementSystem.API\OrderManagementSystem.API.csproj", "{BD2C8BA6-E01C-4758-949E-0A2569C6378C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DBB455B8-8A26-47AE-B9B4-BD8743EAFB59} = {DBB455B8-8A26-47AE-B9B4-BD8743EAFB59}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderManagementSystem.Domain", "OrderManagementSystem.Domain\OrderManagementSystem.Domain.csproj", "{DBB455B8-8A26-47AE-B9B4-BD8743EAFB59}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +20,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{36E206AE-D06D-4469-BF37-6D14CC127F87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36E206AE-D06D-4469-BF37-6D14CC127F87}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36E206AE-D06D-4469-BF37-6D14CC127F87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36E206AE-D06D-4469-BF37-6D14CC127F87}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0386D251-C562-44BB-92DF-3F272C102CF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0386D251-C562-44BB-92DF-3F272C102CF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0386D251-C562-44BB-92DF-3F272C102CF5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -29,6 +30,14 @@ Global
 		{88640F28-81D9-43A7-8E55-27112FE1AC38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88640F28-81D9-43A7-8E55-27112FE1AC38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88640F28-81D9-43A7-8E55-27112FE1AC38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD2C8BA6-E01C-4758-949E-0A2569C6378C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD2C8BA6-E01C-4758-949E-0A2569C6378C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD2C8BA6-E01C-4758-949E-0A2569C6378C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD2C8BA6-E01C-4758-949E-0A2569C6378C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBB455B8-8A26-47AE-B9B4-BD8743EAFB59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBB455B8-8A26-47AE-B9B4-BD8743EAFB59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBB455B8-8A26-47AE-B9B4-BD8743EAFB59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBB455B8-8A26-47AE-B9B4-BD8743EAFB59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
