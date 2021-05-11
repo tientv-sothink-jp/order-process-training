@@ -5,7 +5,7 @@
     [SKU] NCHAR(50) NOT NULL, 
     [Origin] NVARCHAR(150) NOT NULL, 
     [Price] DECIMAL(18, 2) NOT NULL, 
-    [ImageUrl] CHAR(10) NOT NULL,
+    [ImageUrl] CHAR(500) NOT NULL,
     [CreatedTime] DATETIME NOT NULL DEFAULT GETDATE(), 
     [UpdatedTime] DATETIME NULL
 )
