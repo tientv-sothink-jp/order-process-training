@@ -78,11 +78,12 @@
     <Build Include="dbo\Tables\OrderStatus.Master.sql" />
     <Build Include="dbo\Tables\OrderDetail.sql" />
     <Build Include="dbo\Programmability\StoreProcedures\GetUsers.sql" />
-    <None Include="SampleData\InsertUserData.sql" />
+    <None Include="SampleData\InsertUser.sql" />
+    <None Include="SampleData\InsertUserRole.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="OrderManagementSystem.Database.publish.xml" />
-    <None Include="SampleData\InsertRoleMastersql.sql" />
+    <None Include="SampleData\InsertRoleMaster.sql" />
     <None Include="SampleData\InsertProduct.sql" />
     <None Include="SampleData\InsertOrderStatusMaster.sql" />
   </ItemGroup>
