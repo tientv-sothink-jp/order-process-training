@@ -8,10 +8,10 @@ using OrderManagementSystem.Domain.Entities;
 namespace OrderManagementSystem.API.Controllers
 {
     [Route("api/[controller]")]
-    public class RoleMasterController: ControllerBase
+    public class RoleMastersController: ControllerBase
     {
         private readonly OrderManagementSystemContext _orderManagementSystemContext;
-        public RoleMasterController(OrderManagementSystemContext orderManagementSystemContext)
+        public RoleMastersController(OrderManagementSystemContext orderManagementSystemContext)
         {
             _orderManagementSystemContext = orderManagementSystemContext;
         }

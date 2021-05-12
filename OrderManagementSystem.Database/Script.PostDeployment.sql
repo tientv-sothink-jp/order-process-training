@@ -9,7 +9,8 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-:r .\SampleData\InsertUserData.sql
 :r .\SampleData\InsertOrderStatusMaster.sql
 :r .\SampleData\InsertProduct.sql
-:r .\SampleData\InsertRoleMastersql.sql
+:r .\SampleData\InsertRoleMaster.sql
+:r .\SampleData\InsertUser.sql
+:r .\SampleData\InsertUserRole.sql
