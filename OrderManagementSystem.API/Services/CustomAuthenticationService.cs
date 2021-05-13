@@ -10,10 +10,16 @@ using System.Text;
 
 namespace OrderManagementSystem.API.Services
 {
-    class AuthenticationService
+    public interface ICustomAuthenticationService
     {
-        private readonly IConfiguration _configuration;
-        public AuthenticationService(IConfiguration configuration)
+        string GenerateRefreshToken();
+        string GenerateToken(List<Claim> claims);
+        ClaimsPrincipal GetPrincipalFromExpiredToken(string token);
+    }
+    public class CustomAuthenticationService : ICustomAuthenticationService
+    {
+        protected readonly IConfiguration _configuration;
+        public CustomAuthenticationService(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -28,28 +34,27 @@ namespace OrderManagementSystem.API.Services
             }
         }
 
-        public string GenerateToken(LoginResponse user)
+        public string GenerateToken(List<Claim> claims)
         {
-            var claims = new List<Claim>()
+            try
             {
-                new Claim(ClaimTypes.NameIdentifier, user.UserName),
-                new Claim(ClaimTypes.Name, user.Name),
-                new Claim(ClaimTypes.Role, user.RoleName),
-                new Claim(ClaimTypes.Email, user.Email)
-            };
+                var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Secret").Value));
+                var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Secret").Value));
-            var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-
-            var tokenOptions = new JwtSecurityToken(
-                issuer: "https://localhost:44357",
-                audience: "https://localhost:44357",
-                claims: claims,
-                expires: DateTime.Now.AddMinutes(10),
-                signingCredentials: signingCredentials
-            );
-            string token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-            return token;
+                var tokenOptions = new JwtSecurityToken(
+                    issuer: "https://localhost:44357",
+                    audience: "https://localhost:44357",
+                    claims: claims,
+                    expires: DateTime.Now.AddMinutes(10),
+                    signingCredentials: signingCredentials
+                );
+                string token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+                return token;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)

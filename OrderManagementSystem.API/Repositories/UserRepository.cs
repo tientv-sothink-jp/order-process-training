@@ -8,7 +8,12 @@ using System.Text;
 
 namespace OrderManagementSystem.API.Repositories
 {
-    public class UserRepository
+    public interface IUserRepository
+    {
+        User Get(string userName);
+    }
+
+    public class UserRepository: IUserRepository
     {
         private OrderManagementSystemContext _orderManagementSystemContext;
 
@@ -17,44 +22,18 @@ namespace OrderManagementSystem.API.Repositories
             _orderManagementSystemContext = orderManagementSystemContext;
         } 
 
-        public LoginResponse Login(LoginRequest request)
+        public User Get(string userName)
         {
-            LoginResponse loginResponse;
+            User user;
             try
             {
-                loginResponse = _orderManagementSystemContext.UserRoles
-                .Join(
-                    _orderManagementSystemContext.Users,
-                   userRole => userRole.UserId,
-                   user => user.Id,
-                   (userRoleData, userData) => new { userRoleData, userData }
-                )
-                .Join(
-                    _orderManagementSystemContext.RoleMasters,
-                    userRole => userRole.userRoleData.RoleId,
-                    role => role.Id,
-                    (userRoleData, roleData) => new { userRoleData, roleData }
-                )
-                .Where(x => x.userRoleData.userData.UserName == request.UserName && x.userRoleData.userData.Password == request.Password)
-                .Select(joinDataResponse => new LoginResponse()
-                {
-                    Id = joinDataResponse.userRoleData.userData.Id,
-                    UserName = joinDataResponse.userRoleData.userData.UserName,
-                    Password = joinDataResponse.userRoleData.userData.Password,
-                    Name = joinDataResponse.userRoleData.userData.Name,
-                    Phone = joinDataResponse.userRoleData.userData.Phone,
-                    Email = joinDataResponse.userRoleData.userData.Email,
-                    Address = joinDataResponse.userRoleData.userData.Address,
-                    IsActive = joinDataResponse.userRoleData.userData.IsActive,
-                    RoleId = joinDataResponse.roleData.Id,
-                    RoleName = joinDataResponse.roleData.Name
-                }).SingleOrDefault();
+                user = _orderManagementSystemContext.Users.Where(item => item.UserName == userName).SingleOrDefault();
             }
             catch (Exception)
             {
-                loginResponse = null;
+                user = null;
             }
-            return loginResponse;
+            return user;
         }
     }
 }

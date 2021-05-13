@@ -77,15 +77,20 @@
     <Build Include="dbo\Tables\Order.sql" />
     <Build Include="dbo\Tables\OrderStatus.Master.sql" />
     <Build Include="dbo\Tables\OrderDetail.sql" />
-    <Build Include="dbo\Programmability\StoreProcedures\GetUsers.sql" />
     <None Include="SampleData\InsertUser.sql" />
     <None Include="SampleData\InsertUserRole.sql" />
+    <Build Include="dbo\Programmability\StoreProcedures\AddProduct.sql" />
+    <Build Include="dbo\Programmability\StoreProcedures\EditProduct.sql" />
+    <Build Include="dbo\Programmability\StoreProcedures\DeleteProduct.sql" />
+    <Build Include="dbo\Programmability\StoreProcedures\AddOrder.sql" />
+    <Build Include="dbo\Programmability\StoreProcedures\EditOrder.sql" />
+    <Build Include="dbo\Programmability\StoreProcedures\DeleteOrder.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="OrderManagementSystem.Database.publish.xml" />
     <None Include="SampleData\InsertRoleMaster.sql" />
     <None Include="SampleData\InsertProduct.sql" />
     <None Include="SampleData\InsertOrderStatusMaster.sql" />
+    <None Include="OrderManagementSystem.Database.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="OrderManagementSystem.Database.refactorlog" />

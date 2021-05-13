@@ -6,41 +6,26 @@
     <title>@ViewData["Title"] - OrderManagementSystem.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/main.css">
+
+    @* Import AnguarJS module *@
+    <script src="~/lib/angularjs/angular.min.js"></script>
+    <script src="~/lib/angularjs/angular-route.js"></script>
+    @* <script src="~/lib/angularjs/angular-animate.js"></script> *@
+    @* <script src="~/lib/angularjs/ui-bootstrap-tpls-2.5.0.min.js"></script> *@
+    <script src="~/app/core/app.module.js"></script>
+    <script src="~/app/core/app.routing.js"></script>
+    @* Import Angular controller *@
+    <script src="~/app/pages/home/home.controller.js"></script>
+    <script src="~/app/pages/login/login.controller.js"></script>
+    <script src="~/app/pages/product/product.controller.js"></script>
+    @* Import Angular service *@
+    <script src="~/app/pages/login/login.service.js"></script>
+    <script src="~/app/pages/product/product.service.js"></script>
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">OrderManagementSystem.Web</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - OrderManagementSystem.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
-
+<body ng-app="app">
+   @RenderBody()
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
