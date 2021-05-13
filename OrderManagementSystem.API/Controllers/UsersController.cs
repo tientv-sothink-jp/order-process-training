@@ -2,6 +2,7 @@
 using OrderManagementSystem.API.Helpers;
 using OrderManagementSystem.API.Models;
 using OrderManagementSystem.API.Services;
+using OrderManagementSystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,36 +12,41 @@ namespace OrderManagementSystem.API.Controllers
     [Route("api/[controller]")]
     public class UsersController: ControllerBase
     {
-        private UserService _userService;
-        public UsersController(UserService userService)
+        private IUserService _userService;
+        public UsersController(IUserService userService)
         {
             _userService = userService;
         }
-
-        /// <summary>
-        /// Login 111111
-        /// </summary>
-        /// <param name="loginRequest"></param>
-        /// <returns></returns>
-        [HttpPost]
+        
+        [HttpPost("Login")]
         public IActionResult Login([FromBody] LoginRequest loginRequest)
         {
-            DataReponse<LoginResponse> dataReponse;
+            DataReponse<User> dataReponse;
             if (loginRequest == null)
             {
                 return BadRequest("Invalid client request");
             }
 
-            loginRequest.Password = StringCiplerHelper.MD5Hash(loginRequest.Password);
-            LoginResponse loginResponse = _userService.Login(loginRequest);
+            User user = _userService.Login(loginRequest);
 
-            if (loginResponse != null)
+            if (user != null)
             {
-                dataReponse = new DataReponse<LoginResponse>(200, "Đăng nhập thành công.", loginResponse);
+                dataReponse = new DataReponse<User>
+                {
+                    ErrorCode = 200,
+                    Description = "Đăng nhập thành công",
+                    Result = user
+                };
             }
             else
             {
-                dataReponse = new DataReponse<LoginResponse>(401, "Đăng nhập thất bại", null);
+                dataReponse = new DataReponse<User>
+                {
+                    ErrorCode = 401,
+                    Description = "Đăng nhập thất bại",
+                    Result = null
+                };
+                return Unauthorized(dataReponse);
             }    
             return Ok(dataReponse);
         }

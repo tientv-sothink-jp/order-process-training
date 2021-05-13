@@ -1,11 +1,11 @@
 ﻿CREATE TABLE [dbo].[Product]
 (
 	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY DEFAULT newid(), 
-    [Name] NVARCHAR(150) NOT NULL, 
-    [SKU] NCHAR(50) NOT NULL, 
-    [Origin] NVARCHAR(150) NOT NULL, 
+    [Name] NVARCHAR(250) NOT NULL, 
+    [SKU] VARCHAR(150) NOT NULL, 
+    [Origin] NVARCHAR(250) NOT NULL, 
     [Price] DECIMAL(18, 2) NOT NULL, 
-    [ImageUrl] CHAR(500) NOT NULL,
+    [ImageUrl] VARCHAR(500) NOT NULL,
     [CreatedTime] DATETIME NOT NULL DEFAULT GETDATE(), 
     [UpdatedTime] DATETIME NULL
 )

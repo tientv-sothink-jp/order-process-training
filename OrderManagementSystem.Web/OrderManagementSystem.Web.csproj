@@ -10,10 +10,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\app\core\" />
+    <Folder Include="wwwroot\app\pages\product\" />
+    <Folder Include="wwwroot\app\pages\order\" />
+    <Folder Include="wwwroot\app\services\" />
     <Folder Include="wwwroot\lib\angularjs\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
   </ItemGroup>
 

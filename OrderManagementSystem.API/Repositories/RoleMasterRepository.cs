@@ -1,37 +1,37 @@
 ﻿using OrderManagementSystem.Domain.EF;
 using OrderManagementSystem.Domain.Entities;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
-using System.Linq;
 
 namespace OrderManagementSystem.API.Repositories
 {
-    public interface IProductRepository
+    public interface IRoleMasterRepository
     {
-        List<Product> Get();
+        RoleMaster Get(Guid roleId);
     }
 
-    public class ProductRepository: IProductRepository
+    public class RoleMasterRepository: IRoleMasterRepository
     {
         private readonly OrderManagementSystemContext _orderManagementSystemContext;
-        public ProductRepository(OrderManagementSystemContext orderManagementSystem)
+        public RoleMasterRepository(OrderManagementSystemContext orderManagementSystem)
         {
             _orderManagementSystemContext = orderManagementSystem;
         }
 
-        public List<Product> Get()
+        public RoleMaster Get(Guid roleId)
         {
-            List<Product> products;
+            RoleMaster roleMaster;
             try
             {
-                products = _orderManagementSystemContext.Products.ToList<Product>();
+                roleMaster = _orderManagementSystemContext.RoleMasters.Where(item => item.Id == roleId).SingleOrDefault();
             }
             catch (Exception)
             {
-                products = null;
+                roleMaster = null;
             }
-            return products;
+            return roleMaster;
         }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using OrderManagementSystem.API.Repositories;
 using OrderManagementSystem.API.Services;
 using OrderManagementSystem.Domain.EF;
 using System;
@@ -30,17 +31,27 @@ namespace OrderManagementSystem.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
 
             // Add OrderManagementSystemContext
             services.AddDbContext<OrderManagementSystemContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
 
-            // Dependence ApiService
-            services.AddScoped<UserService>();
+            // Depandence ApiRepository
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+            services.AddScoped<IRoleMasterRepository, RoleMasterRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
-            services.AddMvcCore().AddApiExplorer();
+            // Dependence ApiService
+            //services.AddScoped<ICustomAuthenticationService, CustomAuthenticationService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IProductService, ProductService>();
+
+            services.AddMvcCore()
+                .AddApiExplorer()
+                .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>

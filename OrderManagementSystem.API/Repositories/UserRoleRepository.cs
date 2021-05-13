@@ -1,37 +1,35 @@
 ﻿using OrderManagementSystem.Domain.EF;
 using OrderManagementSystem.Domain.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Linq;
 
 namespace OrderManagementSystem.API.Repositories
 {
-    public interface IProductRepository
+    public interface IUserRoleRepository
     {
-        List<Product> Get();
+        UserRole Get(Guid userId);
     }
 
-    public class ProductRepository: IProductRepository
+    public class UserRoleRepository: IUserRoleRepository
     {
         private readonly OrderManagementSystemContext _orderManagementSystemContext;
-        public ProductRepository(OrderManagementSystemContext orderManagementSystem)
+        public UserRoleRepository(OrderManagementSystemContext orderManagementSystem)
         {
             _orderManagementSystemContext = orderManagementSystem;
         }
 
-        public List<Product> Get()
+        public UserRole Get(Guid userId)
         {
-            List<Product> products;
+            UserRole userRole;
             try
             {
-                products = _orderManagementSystemContext.Products.ToList<Product>();
+                userRole = _orderManagementSystemContext.UserRoles.Where(item => item.UserId == userId).SingleOrDefault();
             }
             catch (Exception)
             {
-                products = null;
+                userRole = null;
             }
-            return products;
+            return userRole;
         }
     }
 }
