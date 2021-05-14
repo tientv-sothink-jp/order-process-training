@@ -24,8 +24,10 @@
                 controllerAs: 'vm',
                 templateUrl: "../app/pages/product/product.view.html"
             })
-            .when("/blue", {
-                templateUrl: "blue.htm"
+            .when("/cart", {
+                controller: 'cartController',
+                controllerAs: 'vm',
+                templateUrl: "../app/pages/cart/cart.view.html"
             });
     }
 })();

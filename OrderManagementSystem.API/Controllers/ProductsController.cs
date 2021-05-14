@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OrderManagementSystem.API.Models;
 using OrderManagementSystem.API.Services;
 using OrderManagementSystem.Domain.Entities;
@@ -8,6 +9,7 @@ using System.Text;
 
 namespace OrderManagementSystem.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class ProductsController: ControllerBase
     {
@@ -17,7 +19,7 @@ namespace OrderManagementSystem.API.Controllers
         {
             _productService = productService;
         }
-
+        
         [HttpGet]
         public IActionResult Get()
         {

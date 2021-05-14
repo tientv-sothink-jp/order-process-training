@@ -22,16 +22,7 @@ namespace OrderManagementSystem.API.Repositories
 
         public List<Product> Get()
         {
-            List<Product> products;
-            try
-            {
-                products = _orderManagementSystemContext.Products.ToList<Product>();
-            }
-            catch (Exception)
-            {
-                products = null;
-            }
-            return products;
+            return _orderManagementSystemContext.Products.ToList<Product>();
         }
     }
 }

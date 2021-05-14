@@ -42,8 +42,8 @@ namespace OrderManagementSystem.API.Services
                 var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
 
                 var tokenOptions = new JwtSecurityToken(
-                    issuer: "https://localhost:44357",
-                    audience: "https://localhost:44357",
+                    issuer: _configuration.GetSection("AppSettings:Issuer").Value,
+                    audience: _configuration.GetSection("AppSettings:Audience").Value,
                     claims: claims,
                     expires: DateTime.Now.AddMinutes(10),
                     signingCredentials: signingCredentials

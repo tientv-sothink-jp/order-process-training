@@ -1,0 +1,24 @@
+<div ng-include="'../app/pages/layout/header.view.html'"></div>
+
+<div class="card-list mt-3">
+    <table class="table table-striped">
+        <thead class="text-center">
+          <tr>
+            <th>Tên sản phẩm</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Thành tiền</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in vm.cart">
+            <td>{{item.Name}}</td>
+            <td class="text-center">{{item.Price | currency:"$"}}</td>
+            <td class="text-center">{{item.Quantity}}</td>
+            <td class="text-center">{{item.Price * item.Quantity  | currency:"$"}}</td>
+            <td class="text-center"><button class="btn btn-danger btn-sm" ng-click="vm.remove(item.Id)"><i class="fas fa-trash"></i></button></td>
+          </tr>
+        </tbody>
+      </table>
+</div>

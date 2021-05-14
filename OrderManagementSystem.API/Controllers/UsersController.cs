@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OrderManagementSystem.API.Helpers;
 using OrderManagementSystem.API.Models;
 using OrderManagementSystem.API.Services;
@@ -18,16 +19,17 @@ namespace OrderManagementSystem.API.Controllers
             _userService = userService;
         }
         
+        [AllowAnonymous]
         [HttpPost("Login")]
-        public IActionResult Login([FromBody] LoginRequest loginRequest)
+        public IActionResult Login([FromBody] UserLoginRequest request)
         {
             DataReponse<User> dataReponse;
-            if (loginRequest == null)
+            if (request == null)
             {
                 return BadRequest("Invalid client request");
             }
 
-            User user = _userService.Login(loginRequest);
+            User user = _userService.Login(request.UserName, request.Password);
 
             if (user != null)
             {
