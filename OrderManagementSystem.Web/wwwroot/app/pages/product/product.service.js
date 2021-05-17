@@ -8,10 +8,14 @@
     productService.$inject = ['$http'];
 
     function productService($http) {
-        this.getData = getData;
+        this.getProductList = getProductList;
 
-        function getData() {
-            return $http.get('api/Products');
+        function getProductList() {
+            return $http.get(
+                'api/Products', 
+                { headers: 
+                    { Authorization: 'Bearer '+ JSON.parse(localStorage.getItem('user')).Token }
+                });
          }
     }
 })();

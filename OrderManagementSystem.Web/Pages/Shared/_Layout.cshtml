@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - OrderManagementSystem.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/main.css">
 
@@ -19,9 +20,20 @@
     <script src="~/app/pages/home/home.controller.js"></script>
     <script src="~/app/pages/login/login.controller.js"></script>
     <script src="~/app/pages/product/product.controller.js"></script>
+    <script src="~/app/pages/cart/cart.controller.js"></script>
+    <script src="~/app/pages/order/order.controller.js"></script>
+    <script src="~/app/pages/checkout/checkout.controller.js"></script>
     @* Import Angular service *@
+    <script src="~/app/services/common.service.js"></script>
     <script src="~/app/pages/login/login.service.js"></script>
     <script src="~/app/pages/product/product.service.js"></script>
+    <script src="~/app/pages/cart/cart.service.js"></script>
+    <script src="~/app/pages/order/order.service.js"></script>
+    <script src="~/app/pages/checkout/checkout.service.js"></script>
+    @* Import Angular filter *@
+    <script src="~/app/filters/searchIgnoreVietnameseCharacter.filter.js"></script>
+    @* Import lodash *@
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
 </head>
 <body ng-app="app">
    @RenderBody()

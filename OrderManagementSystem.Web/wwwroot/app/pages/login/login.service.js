@@ -8,9 +8,9 @@
     loginService.$inject = ['$http', '$rootScope'];
 
     function loginService($http, $rootScope) {
-        this.getData = getData;
+        this.login = login;
 
-        function getData(request) {
+        function login(request) {
             return $http.post('api/Users/Login', request);
          }
     }

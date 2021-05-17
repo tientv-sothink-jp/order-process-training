@@ -8,9 +8,9 @@
 .login-view .alert-danger{
     font-size: 13px;
 }
-.card-login{
+/* .card-login{
 
-}
+} */
 
 .card-login .card-header p{
     margin: 0;
@@ -38,8 +38,56 @@
 
 .product-item{
     display: flex;
+    flex-direction: row;
+    align-items: center;
     border: 1px solid #ccc;
+    width: 100%;
+    padding: 5px;
 }
+.product-item .product-image{
+    width: 35%;
+}
+
 .product-item .product-image img{
-    width: 150px;
+    width: 100%;
+}
+
+.product-item .product-content{
+    padding: 5px;
+    display: flex;
+    width: 65%;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+}
+
+.product-item .product-content span{
+    /* display: block; */
+    font-size: 14px;
+}
+
+.product-item .product-content .product-name{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card-list table td:empty{
+    visibility: hidden;
+}
+
+.card-list table img{
+    width: 35px;
+}
+
+.form-checkout input::-webkit-outer-spin-button,
+.form-checkout input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-checkout input[type = number]{
+    -moz-appearance: textfield;
 }

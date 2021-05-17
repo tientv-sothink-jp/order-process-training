@@ -25,7 +25,7 @@
         }
 
         function loginFunction() {
-            loginService.getData(vm).then(
+            loginService.login(vm).then(
                 (response) => {
                     if(response.data.ErrorCode == 200)
                     {

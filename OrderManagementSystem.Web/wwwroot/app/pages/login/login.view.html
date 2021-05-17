@@ -13,11 +13,11 @@
                         <input class="form-control" type="text" placeholder="Tên đăng nhập" ng-model="vm.username">
                     </div>
                     <div class="form-group">
-                        <input class="form-control" type="text" placeholder="Mật khẩu" ng-model="vm.password">
+                        <input class="form-control" type="password" placeholder="Mật khẩu" ng-model="vm.password">
                     </div>
                     <div class="form-check ml-3">
-                        <input type="checkbox" class="form-check-input" ng-model="vm.remember">
-                        <label class="form-check-label" for="exampleCheck1">Ghi nhớ</label>
+                        <input type="checkbox" class="form-check-input" id="remember-check" ng-model="vm.remember">
+                        <label class="form-check-label" for="remember-check">Ghi nhớ</label>
                     </div>
                     <button class="btn btn-primary my-3">Đăng nhập</button>
                 </form>

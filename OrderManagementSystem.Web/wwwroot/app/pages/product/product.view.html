@@ -1,15 +1,26 @@
-<div class="row list-product mt-2">
+<div ng-include="'../app/pages/layout/header.view.html'"></div>
+
+<div class="row mt-3">
     <div class="col-sm-6 col-md-6 col-lg-6">
+        <span>Tổng số sản phẩm trong giỏ hàng: {{vm.cartTotal}}</span>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4 offset-2">
+        <input type="text" class="form-control form-control-sm" ng-model="vm.searchInput" placeholder="Tìm kiếm...">
+    </div>
+</div>
+<div class="row list-product">
+    <div class="col-sm-6 col-md-6 col-lg-4 mt-3" ng-repeat="item in vm.products | filter: vm.searchInput">
         <div class="product-item">
             <div class="product-image">
-                <img src="https://vn-test-11.slatic.net/p/6ee666beada5bc807510a72c6590521a.jpg_720x720q80.jpg_.webp"
+                <img ng-src="{{item.ImageUrl}}"
                     alt="">
             </div>
             <div class="product-content">
-                <h3>name</h3>
-                <p>Mã sản phẩm ..........</p>
-                <p>Xuất xứ: ..........</p>
-                <p>Giá: <strong>3.400.000vnd</strong></p>
+                <span class="product-name">{{item.Name}}</span>
+                <span>Mã sản phẩm: {{item.Sku}}</span>
+                <span>Xuất xứ: {{item.Origin}}</span>
+                <span>Giá: <strong>{{item.Price | currency:"$"}}</strong></span>
+                <button class="btn btn-primary btn-sm mx-auto mt-2" ng-click="vm.AddToCart(item.Id)">Thêm giỏ hàng</button>
             </div>
         </div>
     </div>

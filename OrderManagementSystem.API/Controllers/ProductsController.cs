@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OrderManagementSystem.API.Models;
 using OrderManagementSystem.API.Services;
 using OrderManagementSystem.Domain.Entities;
@@ -8,8 +9,9 @@ using System.Text;
 
 namespace OrderManagementSystem.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
-    public class ProductsController: ControllerBase
+    public class ProductsController : ControllerBase
     {
         private IProductService _productService;
 
@@ -23,6 +25,20 @@ namespace OrderManagementSystem.API.Controllers
         {
             DataReponse<List<Product>> dataReponse;
             List<Product> products = _productService.GetProductList();
+            dataReponse = new DataReponse<List<Product>>
+            {
+                ErrorCode = 200,
+                Description = "Lấy dữ liệu danh sách sản phẩm thành công",
+                Result = products
+            };
+            return Ok(dataReponse);
+        }
+
+        [HttpGet("Paging")]
+        public IActionResult Get([FromQuery] PagingModel paging)
+        {
+            DataReponse<List<Product>> dataReponse;
+            List<Product> products = _productService.GetProductList(paging);
             dataReponse = new DataReponse<List<Product>>
             {
                 ErrorCode = 200,
