@@ -5,43 +5,53 @@
         .module('app')
         .controller('cartController', cartController)
 
-    cartController.$inject = ['$location', 'cartService'];
+    cartController.$inject = ['$location', 'cartService', 'productService'];
 
-    function cartController($location, cartService) {
+    function cartController($location, cartService, productService) {
         /* jshint validthis:true */
         var vm = this;
-        vm.cart;
-        vm.totalPrice;
 
         // function
         vm.remove = remove;
-        vm.updateTotalPrice = updateTotalPrice;
+        vm.displayTotalPrice = displayTotalPrice;
+        vm.updateQuantity = updateQuantity;
         vm.goToCheckoutPage = goToCheckoutPage;
 
         activate();
 
         function activate() {
-            vm.cart = cartService.getList();
-            vm.totalPrice = cartService.getPriceTotal(vm.cart);
+            getCartInfo();
+        }
+
+        function displayTotalPrice() {
+            return cartService.getTotalPrice(vm.cart);
+        }
+
+        function getCartInfo() {
+            vm.cart = cartService.getCart();
+            productService.getProducts(_.map(vm.cart, x => x.id).join(',')).then((res) => {
+                vm.cart = _.chain(res.data.Result)
+                    .filter(x => {
+                        var product = _.chain(vm.cart).find(c => c.id == x.Id).value();
+                        x.quantity = product ? product.quantity : null;
+                        return x.quantity ? x.quantity : false;
+                    })
+                    .value();
+            });
         }
 
         function remove(productId) {
-            cartService.remove(productId);
-            vm.totalPrice = cartService.getPriceTotal(vm.cart);
-        }
-
-        function updateTotalPrice(item) {
-            if(item.Quantity == 0)
-            {
-                cartService.remove(item.Id);
-                vm.totalPrice = cartService.getPriceTotal(vm.cart);
-            }
-            vm.totalPrice = cartService.getPriceTotal(vm.cart);
-            cartService.update(vm.cart);
+            cartService.removeProduct(productId);
+            getCartInfo();
         }
 
         function goToCheckoutPage() {
             $location.path("/checkout");
+        }
+
+        function updateQuantity(item) {
+            cartService.addProduct(item.Id, item.quantity);
+            getCartInfo();
         }
     }
 })();

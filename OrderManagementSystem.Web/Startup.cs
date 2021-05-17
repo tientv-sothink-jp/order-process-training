@@ -66,14 +66,20 @@ namespace OrderManagementSystem.Web
                     Description = "A simple example ASP.NET Core Web API",
                 });
 
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                var securitySchema = new OpenApiSecurityScheme
                 {
-                    In = ParameterLocation.Header,
-                    Description = "Please insert JWT with Bearer into field",
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
                     Name = "Authorization",
-                    Scheme = "Bearer",
+                    In = ParameterLocation.Header,
                     Type = SecuritySchemeType.Http,
-                });
+                    Scheme = "bearer",
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    }
+                };
+                c.AddSecurityDefinition("Bearer", securitySchema);
 
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement {
                     {
