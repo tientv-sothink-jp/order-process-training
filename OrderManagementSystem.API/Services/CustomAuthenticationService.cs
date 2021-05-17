@@ -45,7 +45,7 @@ namespace OrderManagementSystem.API.Services
                     issuer: _configuration.GetSection("AppSettings:Issuer").Value,
                     audience: _configuration.GetSection("AppSettings:Audience").Value,
                     claims: claims,
-                    expires: DateTime.Now.AddMinutes(10),
+                    expires: DateTime.Now.AddHours(24),
                     signingCredentials: signingCredentials
                 );
                 string token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);

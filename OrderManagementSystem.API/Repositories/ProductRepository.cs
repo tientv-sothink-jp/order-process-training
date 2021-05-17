@@ -4,11 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using OrderManagementSystem.API.Models;
 
 namespace OrderManagementSystem.API.Repositories
 {
     public interface IProductRepository
     {
+        List<Product> Get(PagingModel paging);
         List<Product> Get();
     }
 
@@ -18,6 +20,14 @@ namespace OrderManagementSystem.API.Repositories
         public ProductRepository(OrderManagementSystemContext orderManagementSystem)
         {
             _orderManagementSystemContext = orderManagementSystem;
+        }
+
+        public List<Product> Get(PagingModel paging)
+        {
+            return _orderManagementSystemContext.Products
+                .Skip((paging.PageNumber -1) * paging.PageSize)
+                .Take(paging.PageSize)
+                .ToList<Product>();
         }
 
         public List<Product> Get()

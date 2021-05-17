@@ -74,6 +74,20 @@
     font-weight: bold;
 }
 
-.product-item .product-content button{
-    width: 100px;
+.card-list table td:empty{
+    visibility: hidden;
+}
+
+.card-list table img{
+    width: 35px;
+}
+
+.form-checkout input::-webkit-outer-spin-button,
+.form-checkout input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.form-checkout input[type = number]{
+    -moz-appearance: textfield;
 }

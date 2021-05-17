@@ -11,6 +11,8 @@
         this.getList = getList;
         this.add = add;
         this.remove = remove;
+        this.update = update;
+        this.getPriceTotal = getPriceTotal;
 
         this.productList = [];
         this.cart;
@@ -57,7 +59,18 @@
                 this.cart.splice(index, 1);
                 localStorage.setItem('cart', JSON.stringify(this.cart));
             }
-            console.log(this.cart)
+        }
+
+        function update(cart) {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function getPriceTotal(cartData) {
+            var totalPrice = 0;
+            cartData.forEach(element => {
+                totalPrice += element.Quantity * element.Price;
+            });
+            return totalPrice;
         }
     }
 })();

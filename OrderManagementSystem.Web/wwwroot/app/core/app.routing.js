@@ -28,6 +28,16 @@
                 controller: 'cartController',
                 controllerAs: 'vm',
                 templateUrl: "../app/pages/cart/cart.view.html"
-            });
+            })
+            .when("/checkout", {
+                controller: 'checkoutController',
+                controllerAs: 'vm',
+                templateUrl: '../app/pages/checkout/checkout.view.html'
+            })
+            .when("/order", {
+                controller: 'orderController',
+                controllerAs: 'vm',
+                templateUrl: '../app/pages/order/order.view.html'
+            })
     }
 })();

@@ -12,6 +12,8 @@
         var vm = this;
         vm.products;
         vm.cart;
+        vm.cartTotal;
+        vm.searchInput;
 
         // Function
         vm.AddToCart = AddToCart;
@@ -20,6 +22,10 @@
 
         function activate() {
             vm.cart = cartService.getList();
+            vm.cartTotal = 0;
+            vm.cart.forEach(element => {
+                vm.cartTotal += element.Quantity;
+            });
 
             productService.getProductList().then(
                 (response) => {
@@ -34,10 +40,11 @@
 
         function AddToCart(productId) {
             cartService.add(productId);
-        }
-        
-        function removeFromCart(productId) {
-            cartService.remove(productId);
+            var cart = cartService.getList();
+            vm.cartTotal = 0;
+            cart.forEach(element => {
+                vm.cartTotal += element.Quantity;
+            })
         }
     }
 })();
