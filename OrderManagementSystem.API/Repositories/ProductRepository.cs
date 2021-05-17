@@ -11,6 +11,7 @@ namespace OrderManagementSystem.API.Repositories
     public interface IProductRepository
     {
         List<Product> Get(PagingModel paging);
+        List<Product> Get(List<Guid> id);
         List<Product> Get();
     }
 
@@ -32,7 +33,12 @@ namespace OrderManagementSystem.API.Repositories
 
         public List<Product> Get()
         {
-            return _orderManagementSystemContext.Products.ToList<Product>();
+            return _orderManagementSystemContext.Products.ToList();
+        }
+
+        public List<Product> Get(List<Guid> id)
+        {
+            return _orderManagementSystemContext.Products.Where(x => id.Contains(x.Id)).ToList();
         }
     }
 }

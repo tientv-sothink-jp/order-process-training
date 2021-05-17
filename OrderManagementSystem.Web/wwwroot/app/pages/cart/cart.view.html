@@ -17,8 +17,8 @@
             <td><img ng-src="{{item.ImageUrl}}" alt=""></td>
             <td>{{item.Name}}</td>
             <td class="text-center">{{item.Price | currency:"$"}}</td>
-            <td><input class="form-control form-control-sm text-right" type="number" min="0" ng-model="item.Quantity" ng-change="vm.updateTotalPrice(item)"></td>
-            <td class="text-center">{{item.Price * item.Quantity  | currency:"$"}}</td>
+            <td><input class="form-control form-control-sm text-right" type="number" min="0" ng-model="item.quantity" ng-blur="vm.updateQuantity(item)"></td>
+            <td class="text-center">{{item.Price * item.quantity  | currency:"$"}}</td>
             <td class="text-center"><button class="btn btn-danger btn-sm" ng-click="vm.remove(item.Id)"><i class="fas fa-trash"></i></button></td>
           </tr>
           <tr>
@@ -26,7 +26,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td class="text-center table-borderless">Tổng: {{vm.totalPrice | currency}}</td>
+            <td class="text-center table-borderless">Tổng: {{vm.displayTotalPrice() | currency}}</td>
             <td></td>
           </tr>
         </tbody>

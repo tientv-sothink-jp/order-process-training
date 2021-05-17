@@ -8,69 +8,60 @@
     cartService.$inject = ['$http'];
 
     function cartService($http) {
-        this.getList = getList;
-        this.add = add;
-        this.remove = remove;
-        this.update = update;
-        this.getPriceTotal = getPriceTotal;
+        this.getCart = getCart;
+        this.setCart = setCart;
+        this.addProduct = addProduct;
+        this.removeProduct = removeProduct;
+        this.getTotalPrice = getTotalPrice;
+        this.getTotalQuantity = getTotalQuantity;
 
         this.productList = [];
-        this.cart;
 
-        function getList() {
-            this.cart = JSON.parse(localStorage.getItem('cart'));
+        /*
+        [{
+            id: string, //product id
+            quantity: number
+        }]
+        */
 
-            if (!this.cart) {
-                return this.cart = [];
-            }
-
-            return this.cart;
+        function getCart() {
+            return JSON.parse(localStorage.getItem('cart')) || [];
         }
 
-        function add(productId) {
-            this.cart = JSON.parse(localStorage.getItem('cart'));
-            if (!this.cart) {
-                this.cart == [];
-            }
-            var product = _.find(this.productList, ['Id', productId]);
-            var cartItem = _.find(this.cart, ['Id', productId]);
-
-            if (!this.cart) {
-                this.cart = [];
-            }
-
-            if (cartItem) {
-                cartItem.Quantity++;
-            }
-            else {
-                product.Quantity = 1;
-                this.cart.push(product);
-            }
-            localStorage.setItem('cart', JSON.stringify(this.cart));
-            console.log(this.cart);
-        }
-
-        function remove(productId) {
-            var index = this.cart.findIndex(function(item){
-                return item.Id == productId;
-            })
-            if(index !== -1)
-            {
-                this.cart.splice(index, 1);
-                localStorage.setItem('cart', JSON.stringify(this.cart));
-            }
-        }
-
-        function update(cart) {
+        function setCart(cart) {
             localStorage.setItem('cart', JSON.stringify(cart));
         }
 
-        function getPriceTotal(cartData) {
-            var totalPrice = 0;
-            cartData.forEach(element => {
-                totalPrice += element.Quantity * element.Price;
-            });
-            return totalPrice;
+        function addProduct(productId, quantity) {
+            var cart = getCart();
+
+            var product = _.find(cart, x => x.id == productId);
+
+            if (product) product.quantity = quantity ? quantity : 1;
+            else cart.push({ id: productId, quantity: quantity ? quantity : 1 })
+
+            this.setCart(cart);
+        }
+
+        function removeProduct(productId) {
+            var cart = getCart();
+            cart = _.filter(cart, x => !(x.id.indexOf(productId) > -1));
+            this.setCart(cart);
+        }
+
+        function getTotalQuantity() {
+            var cart = getCart();
+
+            return _.chain(cart).map(x => x.quantity).sum().value();
+        }
+
+        function getTotalPrice(productList) {
+            return _.chain(productList)
+                .map((e) => {
+                    return e.quantity * e.Price;
+                })
+                .sum()
+                .value();
         }
     }
 })();

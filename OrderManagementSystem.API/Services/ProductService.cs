@@ -9,8 +9,9 @@ namespace OrderManagementSystem.API.Services
 {
     public interface IProductService
     {
-        List<Product> GetProductList();
+        List<Product> GetProducts();
         List<Product> GetProductList(PagingModel paging);
+        List<Product> GetProducts(List<Guid> id);
     }
 
     public class ProductService : IProductService
@@ -27,9 +28,14 @@ namespace OrderManagementSystem.API.Services
             return _productrepository.Get(paging);
         }
 
-        public List<Product> GetProductList()
+        public List<Product> GetProducts()
         {
             return _productrepository.Get();
+        }
+
+        public List<Product> GetProducts(List<Guid> id)
+        {
+            return _productrepository.Get(id);
         }
     }
 }
