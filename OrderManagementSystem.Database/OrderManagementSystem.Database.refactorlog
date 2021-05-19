@@ -154,4 +154,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="DateDelivered" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="ca02fd33-ebff-4b32-934b-168edf940815" ChangeDateTime="05/17/2021 11:05:20">
+    <Property Name="ElementName" Value="[dbo].[Cart].[Price]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Cart]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ProductPrice" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="cbb6aef6-5798-4263-8308-8bce36f7ebc8" ChangeDateTime="05/17/2021 11:05:26">
+    <Property Name="ElementName" Value="[dbo].[Cart].[Name]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Cart]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ProductName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3f62a4ee-de3c-4a33-add6-bb5ed9fd343d" ChangeDateTime="05/17/2021 11:05:30">
+    <Property Name="ElementName" Value="[dbo].[Cart].[ImageUrl]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Cart]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ProductImageUrl" />
+  </Operation>
 </Operations>

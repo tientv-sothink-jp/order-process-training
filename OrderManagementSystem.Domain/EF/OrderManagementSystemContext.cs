@@ -1,11 +1,15 @@
 ﻿using System;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using OrderManagementSystem.Domain.Core;
 using OrderManagementSystem.Domain.Entities;
+
+#nullable disable
 
 namespace OrderManagementSystem.Domain.EF
 {
-    public partial class OrderManagementSystemContext : DbContext
+    public partial class OrderManagementSystemContext : DbContext, ICoreDbContext
     {
         public OrderManagementSystemContext()
         {
@@ -16,6 +20,7 @@ namespace OrderManagementSystem.Domain.EF
         {
         }
 
+        public virtual DbSet<Cart> Carts { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<OrderStatusMaster> OrderStatusMasters { get; set; }
@@ -24,15 +29,54 @@ namespace OrderManagementSystem.Domain.EF
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
 
+        public SqlConnection DbConnection
+        {
+            get
+            {
+                var connection = this.Database.GetDbConnection() as SqlConnection;
+                if (connection.State == System.Data.ConnectionState.Closed)
+                    connection.Open();
+                return connection;
+            }
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<Cart>(entity =>
+            {
+                entity.ToTable("Cart");
+
+                entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.CreatedTime)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.ProductImageUrl)
+                    .IsRequired()
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProductName)
+                    .IsRequired()
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.ProductPrice).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.UpdatedTime).HasColumnType("datetime");
+            });
 
             modelBuilder.Entity<Order>(entity =>
             {
                 entity.ToTable("Order");
 
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
 
                 entity.Property(e => e.CreatedTime)
                     .HasColumnType("datetime")
@@ -107,25 +151,24 @@ namespace OrderManagementSystem.Domain.EF
 
                 entity.Property(e => e.ImageUrl)
                     .IsRequired()
-                    .HasMaxLength(10)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
+                    .HasMaxLength(500)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasMaxLength(150);
+                    .HasMaxLength(250);
 
                 entity.Property(e => e.Origin)
                     .IsRequired()
-                    .HasMaxLength(150);
+                    .HasMaxLength(250);
 
                 entity.Property(e => e.Price).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.Sku)
                     .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("SKU")
-                    .IsFixedLength(true);
+                    .HasMaxLength(150)
+                    .IsUnicode(false)
+                    .HasColumnName("SKU");
 
                 entity.Property(e => e.UpdatedTime).HasColumnType("datetime");
             });

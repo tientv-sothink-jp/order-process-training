@@ -27,14 +27,13 @@
         function loginFunction() {
             loginService.login(vm).then(
                 (response) => {
-                    if(response.data.ErrorCode == 200)
+                    if(response.data.errorCode == 200)
                     {
-                        localStorage.setItem('user', JSON.stringify(response.data.Result));
+                        localStorage.setItem('user', JSON.stringify(response.data.result));
                         $location.path('/');
                     }
                     else 
                     {
-                        console.log('abc')
                         vm.showFlagLogin = true;
                         vm.loginNotification = "Đăng nhập thất bại, vui lòng kiểm tra lại tên đang nhập và mật khẩu";
                     }

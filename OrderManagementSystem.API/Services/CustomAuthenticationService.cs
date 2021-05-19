@@ -45,7 +45,7 @@ namespace OrderManagementSystem.API.Services
                     issuer: _configuration.GetSection("AppSettings:Issuer").Value,
                     audience: _configuration.GetSection("AppSettings:Audience").Value,
                     claims: claims,
-                    expires: DateTime.Now.AddHours(24),
+                    expires: DateTime.Now.AddHours(int.Parse(_configuration.GetSection("AppSettings:Expires").Value)),
                     signingCredentials: signingCredentials
                 );
                 string token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
@@ -67,8 +67,8 @@ namespace OrderManagementSystem.API.Services
                 ValidateIssuerSigningKey = true,
                 ClockSkew = TimeSpan.Zero,
 
-                ValidIssuer = "https://localhost:44357",
-                ValidAudience = "https://localhost:44357",
+                ValidIssuer = _configuration.GetSection("AppSettings:Issuer").Value,
+                ValidAudience = _configuration.GetSection("AppSettings:Audience").Value,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Secret").Value))
             };
 

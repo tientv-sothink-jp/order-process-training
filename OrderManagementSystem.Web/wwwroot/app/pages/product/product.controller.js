@@ -13,7 +13,7 @@
         vm.products = [];
         vm.searchInput = '';
         
-        vm.displayOrderQuantity = displayOrderQuantity;
+        // vm.displayOrderQuantity = cartService.getTotalQuantity;
 
         // Function
         vm.AddToCart = AddToCart;
@@ -23,7 +23,7 @@
         function activate() {
             productService.getProductList().then(
                 (response) => {
-                    vm.products = response.data.Result;
+                    vm.products = response.data.result;
                 },
                 (error) => {
                     console.log(error);
@@ -31,11 +31,8 @@
             );
         }
 
-        function displayOrderQuantity() {
-            return cartService.getTotalQuantity();
-        }
-
         function AddToCart(productId) {
+            alert('Thêm giỏ hàng thành công!');
             cartService.addProduct(productId);
         }
     }

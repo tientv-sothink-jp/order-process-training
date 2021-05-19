@@ -14,12 +14,12 @@
         </thead> -->
         <tbody>
           <tr ng-repeat="item in vm.cart">
-            <td><img ng-src="{{item.ImageUrl}}" alt=""></td>
-            <td>{{item.Name}}</td>
-            <td class="text-center">{{item.Price | currency:"$"}}</td>
+            <td><img ng-src="{{item.productImageUrl}}" alt=""></td>
+            <td>{{item.productName}}</td>
+            <td class="text-center">{{item.productPrice | currency:"$"}}</td>
             <td><input class="form-control form-control-sm text-right" type="number" min="0" ng-model="item.quantity" ng-blur="vm.updateQuantity(item)"></td>
-            <td class="text-center">{{item.Price * item.quantity  | currency:"$"}}</td>
-            <td class="text-center"><button class="btn btn-danger btn-sm" ng-click="vm.remove(item.Id)"><i class="fas fa-trash"></i></button></td>
+            <td class="text-center">{{item.productPrice * item.quantity  | currency:"$"}}</td>
+            <td class="text-center"><button class="btn btn-danger btn-sm" ng-click="vm.remove(item.id)"><i class="fas fa-trash"></i></button></td>
           </tr>
           <tr>
             <td></td>
