@@ -19,6 +19,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using OrderManagementSystem.API.Core.Middleware;
+using OrderManagementSystem.API.Core.Services;
 
 namespace OrderManagementSystem.Web
 {
@@ -46,15 +48,17 @@ namespace OrderManagementSystem.Web
             services.AddScoped<IUserRoleRepository, UserRoleRepository>();
             services.AddScoped<IRoleMasterRepository, RoleMasterRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
 
             // Dependence ApiService
             //services.AddScoped<ICustomAuthenticationService, CustomAuthenticationService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICartService, CartService>();
+            services.AddScoped<IdentityService, IdentityService>();
 
             services.AddMvcCore()
-                .AddApiExplorer()
-                .AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
+                .AddApiExplorer();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -152,6 +156,8 @@ namespace OrderManagementSystem.Web
             app.UseRouting();
 
             app.UseAuthentication();
+
+            app.UseMiddleware<IdentityMiddleware>();
 
             app.UseAuthorization();
 

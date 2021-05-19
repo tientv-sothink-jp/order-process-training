@@ -1,6 +1,0 @@
-﻿CREATE PROCEDURE DeleteOrder
-    @Id UNIQUEIDENTIFIER
-AS
-DELETE FROM dbo.[Order]
-   WHERE dbo.[Order].Id = @Id
-RETURN 0

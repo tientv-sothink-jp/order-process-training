@@ -1,4 +1,5 @@
-﻿using OrderManagementSystem.API.Models;
+﻿using OrderManagementSystem.API.Core.Services;
+using OrderManagementSystem.API.Models;
 using OrderManagementSystem.API.Repositories;
 using OrderManagementSystem.Domain.Entities;
 using System;
@@ -12,15 +13,30 @@ namespace OrderManagementSystem.API.Services
         List<Product> GetProducts();
         List<Product> GetProductList(PagingModel paging);
         List<Product> GetProducts(List<Guid> id);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="product"></param>
+        /// <param name="quantity"></param>
+        /// <returns>Cart Id</returns>
+        Guid AddToCart(Product product, int quantity);
     }
 
-    public class ProductService : IProductService
+    public class ProductService : BaseService, IProductService
     {
         private IProductRepository _productrepository;
 
-        public ProductService(IProductRepository productrepository)
+        public ProductService(IProductRepository productrepository, IIdentityService identityService) : base(identityService)
         {
             _productrepository = productrepository;
+        }
+
+        public Guid AddToCart(Product product, int quantity)
+        {
+            var x = IdentityService.User;
+            var y = IdentityService.Name;
+
+            return Guid.NewGuid();
         }
 
         public List<Product> GetProductList(PagingModel paging)

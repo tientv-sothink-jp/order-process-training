@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[CartDetail]
+(
+	[Id] INT NOT NULL PRIMARY KEY, 
+    -- [Id] UNIQUEIDENTIFIER NULL
+)

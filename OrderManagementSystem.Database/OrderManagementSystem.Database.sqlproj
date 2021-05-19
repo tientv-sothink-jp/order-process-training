@@ -79,18 +79,21 @@
     <Build Include="dbo\Tables\OrderDetail.sql" />
     <None Include="SampleData\InsertUser.sql" />
     <None Include="SampleData\InsertUserRole.sql" />
-    <Build Include="dbo\Programmability\StoreProcedures\AddProduct.sql" />
-    <Build Include="dbo\Programmability\StoreProcedures\EditProduct.sql" />
-    <Build Include="dbo\Programmability\StoreProcedures\DeleteProduct.sql" />
+    <Build Include="dbo\Tables\Cart.sql" />
+    <Build Include="dbo\Programmability\StoreProcedures\AddCart.sql" />
+    <Build Include="dbo\Programmability\Types\User-Defined Table Types\CartType.sql" />
+    <Build Include="dbo\Programmability\StoreProcedures\EditCart.sql" />
     <Build Include="dbo\Programmability\StoreProcedures\AddOrder.sql" />
     <Build Include="dbo\Programmability\StoreProcedures\EditOrder.sql" />
-    <Build Include="dbo\Programmability\StoreProcedures\DeleteOrder.sql" />
+    <Build Include="dbo\Tables\CartDetail.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SampleData\InsertRoleMaster.sql" />
     <None Include="SampleData\InsertProduct.sql" />
     <None Include="SampleData\InsertOrderStatusMaster.sql" />
     <None Include="OrderManagementSystem.Database.publish.xml" />
+    <None Include="dbo\Programmability\StoreProcedures\AddOrderDetail.sql" />
+    <None Include="dbo\Programmability\StoreProcedures\EditOrderDetail.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="OrderManagementSystem.Database.refactorlog" />
