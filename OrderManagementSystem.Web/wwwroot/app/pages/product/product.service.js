@@ -9,22 +9,22 @@
 
     function productService($http) {
         this.getProductList = getProductList;
-        // this.getProducts = getProducts
+        this.getProducts = getProducts
 
         function getProductList() {
             return $http.get(
                 'api/Products', 
                 { headers: 
-                    { Authorization: 'Bearer '+ JSON.parse(localStorage.getItem('user')).token }
+                    { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
                 });
         }
         
-        // function getProducts(id) {
-        //     return $http.get(
-        //         `api/Products/${encodeURIComponent(id)}`, 
-        //         { headers: 
-        //             { Authorization: 'Bearer '+ JSON.parse(localStorage.getItem('user')).token }
-        //         });
-        //  }
+        function getProducts(id) {
+            return $http.get(
+                `api/Products/${encodeURIComponent(id)}`, 
+                { headers: 
+                    { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
+                });
+         }
     }
 })();

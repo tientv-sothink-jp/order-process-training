@@ -13,7 +13,7 @@
           </tr>
         </thead> -->
         <tbody>
-          <tr ng-repeat="item in vm.cart">
+          <tr ng-repeat="item in vm.dataSource">
             <td><img ng-src="{{item.productImageUrl}}" alt=""></td>
             <td>{{item.productName}}</td>
             <td class="text-center">{{item.productPrice | currency:"$"}}</td>
@@ -33,7 +33,7 @@
       </table>
       <div class="row">
         <div class="col-2 offset-10 text-right">
-          <button class="btn btn-primary" ng-click="vm.goToCheckoutPage()">Thanh toán</button>
+          <button class="btn btn-primary" ng-click="vm.goToCheckoutPage()">Đặt hàng</button>
         </div>
       </div>
 </div>

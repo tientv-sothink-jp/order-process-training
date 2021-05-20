@@ -1,19 +1,10 @@
 ﻿CREATE PROCEDURE AddOrder
-    @DateDelivered DATETIME,
-    @Discount DECIMAL(18,2),
-    @OrderStatusId INT,
-    @CustomerName NVARCHAR(250),
-    @CustomerPhone CHAR(15),
-    @CustomerEmail char(150),
-    @CustomerAddress NVARCHAR(250)
+    (@Order AS [dbo].[OrderType] READONLY)
 AS
 -- Insert rows into table 'TableName'
 INSERT INTO dbo.[Order]
     ( -- columns to insert data into
-        [DateDelivered], [Discount], [OrderStatusId], [CustomerName], [CustomerPhone], [CustomerEmail], [CustomerAddress]
+        [Discount], [OrderStatusId]
     )
-VALUES
-    ( 
-        @DateDelivered, @Discount, @OrderStatusId, @CustomerName, @CustomerPhone, @CustomerEmail, @CustomerAddress
-	)
+    SELECT [Discount], [OrderStatusId] FROM @Order
 	

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OrderManagementSystem.API.Core.Controllers;
 using OrderManagementSystem.API.Models;
 using OrderManagementSystem.API.Services;
 using OrderManagementSystem.Domain.Entities;
@@ -11,7 +12,7 @@ namespace OrderManagementSystem.API.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]
-    public class CartsController: ControllerBase
+    public class CartsController: BaseApiController
     {
         private ICartService _cartService;
 
@@ -23,14 +24,10 @@ namespace OrderManagementSystem.API.Controllers
         [HttpGet("{userId}")]
         public IActionResult Get(Guid userId)
         {
-            List<Cart> carts = _cartService.Get(userId);
-            DataReponse<List<Cart>> dataresponse = new DataReponse<List<Cart>>
-            {
-                ErrorCode = 200,
-                Description = "Lấy danh sách giỏ hàng thành công",
-                Result = carts
-            };
-            return Ok(dataresponse);
+            Cart carts = _cartService.Get(userId);
+            DataReponse.Description = "Lấy danh sách giỏ hàng thành công";
+            DataReponse.Result = carts;
+            return Ok(DataReponse);
         }
 
         [HttpPost]

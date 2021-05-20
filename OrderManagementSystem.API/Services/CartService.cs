@@ -8,7 +8,7 @@ namespace OrderManagementSystem.API.Services
 {
     public interface ICartService
     {
-        List<Cart> Get(Guid userId);
+        Cart Get(Guid userId);
         void Add(List<Cart> cartItems);
         void Edit(Guid id, List<Cart> cartItem);
         void Delete(Guid id);
@@ -35,7 +35,7 @@ namespace OrderManagementSystem.API.Services
             _cartRepository.Delete(id);
         }
 
-        public List<Cart> Get(Guid userId)
+        public Cart Get(Guid userId)
         {
             return _cartRepository.Get(userId);
         }

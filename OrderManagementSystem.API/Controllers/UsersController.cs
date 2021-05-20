@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OrderManagementSystem.API.Core.Controllers;
 using OrderManagementSystem.API.Helpers;
 using OrderManagementSystem.API.Models;
 using OrderManagementSystem.API.Services;
@@ -11,7 +12,7 @@ using System.Text;
 namespace OrderManagementSystem.API.Controllers
 {
     [Route("api/[controller]")]
-    public class UsersController: ControllerBase
+    public class UsersController: BaseApiController
     {
         private IUserService _userService;
         public UsersController(IUserService userService)
@@ -23,7 +24,6 @@ namespace OrderManagementSystem.API.Controllers
         [HttpPost("Login")]
         public IActionResult Login([FromBody] UserLoginRequest request)
         {
-            DataReponse<User> dataReponse;
             if (request == null)
             {
                 return BadRequest("Invalid client request");
@@ -33,24 +33,26 @@ namespace OrderManagementSystem.API.Controllers
 
             if (user != null)
             {
-                dataReponse = new DataReponse<User>
-                {
-                    ErrorCode = 200,
-                    Description = "Đăng nhập thành công",
-                    Result = user
-                };
+                DataReponse.Description = "Đăng nhập thành công";
+                DataReponse.Result = user;
             }
             else
             {
-                dataReponse = new DataReponse<User>
-                {
-                    ErrorCode = 401,
-                    Description = "Đăng nhập thất bại",
-                    Result = null
-                };
-                return Unauthorized(dataReponse);
+                DataReponse.ErrorCode = 401;
+                DataReponse.Description = "Đăng nhập thất bại";
+                DataReponse.Result = null;
+                return Unauthorized(DataReponse);
             }    
-            return Ok(dataReponse);
+            return Ok(DataReponse);
+        }
+
+        [Authorize]
+        [HttpGet("{userId}")]
+        public IActionResult Get(Guid userId)
+        {
+            DataReponse.Description = "Lấy thông tin user thành công";
+            DataReponse.Result = _userService.Get(userId);
+            return Ok(DataReponse);
         }
     }
 }

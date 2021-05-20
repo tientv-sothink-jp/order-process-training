@@ -49,13 +49,19 @@ namespace OrderManagementSystem.Web
             services.AddScoped<IRoleMasterRepository, RoleMasterRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<ICartDetailRepository, CartDetailRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
 
             // Dependence ApiService
             //services.AddScoped<ICustomAuthenticationService, CustomAuthenticationService>();
+            services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICartService, CartService>();
-            services.AddScoped<IdentityService, IdentityService>();
+            services.AddScoped<ICartDetailService, CartDetailService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IOrderDetailService, OrderDetailService>();
 
             services.AddMvcCore()
                 .AddApiExplorer();
@@ -157,9 +163,10 @@ namespace OrderManagementSystem.Web
 
             app.UseAuthentication();
 
-            app.UseMiddleware<IdentityMiddleware>();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<IdentityMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
@@ -167,9 +174,7 @@ namespace OrderManagementSystem.Web
                 endpoints.MapControllerRoute(
                     "default",
                     "{controller=Home}/{action=Main}/{id?}",
-                    new
-                    {
-                    }
+                    new{}
                 );
             });
         }
