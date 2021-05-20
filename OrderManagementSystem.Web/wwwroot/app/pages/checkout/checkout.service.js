@@ -8,8 +8,12 @@
     checkoutService.$inject = ['$http'];
 
     function checkoutService($http) {
-        this.getData = getData;
+        this.getUserInfo = getUserInfo;
 
-        function getData() { }
+        function getUserInfo(userId) { 
+            return $http.get(`api/Users/${userId}`, {
+                headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
+            });
+        }
     }
 })();

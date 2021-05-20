@@ -5,14 +5,14 @@
         .module('app')
         .controller('productController', productController)
 
-    productController.$inject = ['$location', 'productService', 'cartService'];
+    productController.$inject = ['$location', 'productService', 'cartService', 'cartDetailService'];
 
-    function productController($location, productService, cartService) {
+    function productController($location, productService, cartService, cartDetailService) {
         /* jshint validthis:true */
         var vm = this;
         vm.products = [];
         vm.searchInput = '';
-        
+
         // vm.displayOrderQuantity = cartService.getTotalQuantity;
 
         // Function
@@ -31,9 +31,24 @@
             );
         }
 
-        function AddToCart(productId) {
+        function AddToCart(product) {
             alert('Thêm giỏ hàng thành công!');
-            cartService.addProduct(productId);
+            cartService.getCart().then((response) => {
+                var cart = response.data.result;
+                if (!cart) {
+                    cartService.insertCart();
+                }
+                cartDetailService.getCartDetail(cart.id).then((response) => {
+                    var cartDetails = response.data.result;
+                    var cartDetailItem = _.find(cartDetails, x => x.productId == product.id);
+                    if (cartDetailItem) {
+                        cartDetailItem.quantity += 1;
+                        cartDetailService.updateProduct(cartDetailItem.id, cart.id, product.id, product.price, cartDetailItem.quantity)
+                    } else {
+                        cartDetailService.insertProduct(cart.id, product.id, product.price, 1)
+                    }
+                })
+            })
         }
     }
 })();

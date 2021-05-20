@@ -21,6 +21,7 @@ namespace OrderManagementSystem.Domain.EF
         }
 
         public virtual DbSet<Cart> Carts { get; set; }
+        public virtual DbSet<CartDetail> CartDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<OrderStatusMaster> OrderStatusMasters { get; set; }
@@ -42,6 +43,7 @@ namespace OrderManagementSystem.Domain.EF
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -58,14 +60,18 @@ namespace OrderManagementSystem.Domain.EF
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.ProductImageUrl)
-                    .IsRequired()
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
+                entity.Property(e => e.UpdatedTime).HasColumnType("datetime");
+            });
 
-                entity.Property(e => e.ProductName)
-                    .IsRequired()
-                    .HasMaxLength(250);
+            modelBuilder.Entity<CartDetail>(entity =>
+            {
+                entity.ToTable("CartDetail");
+
+                entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
+
+                entity.Property(e => e.CreatedTime)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.ProductPrice).HasColumnType("decimal(18, 2)");
 
@@ -81,26 +87,6 @@ namespace OrderManagementSystem.Domain.EF
                 entity.Property(e => e.CreatedTime)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.CustomerAddress)
-                    .IsRequired()
-                    .HasMaxLength(250);
-
-                entity.Property(e => e.CustomerEmail)
-                    .IsRequired()
-                    .HasMaxLength(150)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
-
-                entity.Property(e => e.CustomerName)
-                    .IsRequired()
-                    .HasMaxLength(250);
-
-                entity.Property(e => e.CustomerPhone)
-                    .IsRequired()
-                    .HasMaxLength(15)
-                    .IsUnicode(false)
-                    .IsFixedLength(true);
 
                 entity.Property(e => e.DateDelivered).HasColumnType("datetime");
 
@@ -118,6 +104,8 @@ namespace OrderManagementSystem.Domain.EF
                 entity.Property(e => e.CreatedTime)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.ProductPrice).HasColumnType("decimal(18, 0)");
 
                 entity.Property(e => e.UpdatedTime).HasColumnType("datetime");
             });

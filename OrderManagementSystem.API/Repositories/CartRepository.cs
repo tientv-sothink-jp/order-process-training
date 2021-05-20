@@ -14,7 +14,8 @@ namespace OrderManagementSystem.API.Repositories
 {
     public interface ICartRepository
     {
-        List<Cart> Get(Guid userId);
+        Cart Get(Guid userId);
+ 
         void Add(List<Cart> cartItems);
         void Edit(Guid id, List<Cart> cartItem);
         void Delete(Guid id);
@@ -36,14 +37,14 @@ namespace OrderManagementSystem.API.Repositories
             _orderManagementSystemContext.SaveChanges();
         }
 
-        public List<Cart> Get(Guid userId)
+        public Cart Get(Guid userId)
         {
-            return _orderManagementSystemContext.Carts.Where(item => item.UserId == userId).ToList();
+            return _orderManagementSystemContext.Carts.Where(item => item.UserId == userId).SingleOrDefault();
         }
 
         public void Add(List<Cart> cartItems)
         {
-            string[] columnNames = { "Id", "UserId", "ProductId", "ProductImageUrl", "ProductName", "ProductPrice", "Quantity", "CreatedTime", "UpdatedTime" };
+            string[] columnNames = { "Id", "UserId", "CreatedTime", "UpdatedTime" };
 
             var parameter = new SqlParameter("@Cart", SqlDbType.Structured);
             parameter.Value = cartItems.ToDataTable(columnNames);
@@ -57,7 +58,7 @@ namespace OrderManagementSystem.API.Repositories
 
         public void Edit(Guid id, List<Cart> cartItems)
         {
-            string[] columnNames = { "Id", "UserId", "ProductId", "ProductImageUrl", "ProductName", "ProductPrice", "Quantity", "CreatedTime", "UpdatedTime" };
+            string[] columnNames = { "Id", "UserId", "CreatedTime", "UpdatedTime" };
 
             SqlParameter[] sqlParameters = new SqlParameter[2];
 

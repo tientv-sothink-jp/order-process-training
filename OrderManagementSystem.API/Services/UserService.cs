@@ -13,6 +13,7 @@ namespace OrderManagementSystem.API.Services
     public interface IUserService
     {
         User Login(string username, string password);
+        User Get(Guid userId);
     }
 
     public class UserService : CustomAuthenticationService, IUserService
@@ -25,6 +26,11 @@ namespace OrderManagementSystem.API.Services
             _userrepository = userRepository;
             _userRoleRepository = userRoleRepository;
             _roleMasterRepository = roleMasterRepository;
+        }
+
+        public User Get(Guid userId)
+        {
+            return _userrepository.Get(userId);
         }
 
         public User Login(string username, string password)

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OrderManagementSystem.API.Models
 {
-    public class DataReponse<T>
+    public class DataReponse
     {
         //public DataReponse(int errorCode, string description, T result)
         //{
@@ -15,6 +15,6 @@ namespace OrderManagementSystem.API.Models
 
         public int ErrorCode { get; set; }
         public string Description { get; set; }
-        public T Result { get; set; }
+        public object Result { get; set; }
     }
 }

@@ -11,6 +11,7 @@ namespace OrderManagementSystem.API.Repositories
     public interface IUserRepository
     {
         User Get(string userName);
+        User Get(Guid userId);
     }
 
     public class UserRepository: IUserRepository
@@ -24,16 +25,12 @@ namespace OrderManagementSystem.API.Repositories
 
         public User Get(string userName)
         {
-            User user;
-            try
-            {
-                user = _orderManagementSystemContext.Users.Where(item => item.UserName == userName).SingleOrDefault();
-            }
-            catch (Exception)
-            {
-                user = null;
-            }
-            return user;
+            return _orderManagementSystemContext.Users.Where(item => item.UserName == userName).SingleOrDefault();
+        }
+
+        public User Get(Guid userId)
+        {
+            return _orderManagementSystemContext.Users.Where(item => item.Id == userId).SingleOrDefault();
         }
     }
 }

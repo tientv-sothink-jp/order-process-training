@@ -7,11 +7,6 @@ BEGIN
 	UPDATE dbo.Cart 
 	SET 
 		UserId = C.UserId
-		,ProductId = c.ProductId
-		,ProductImageUrl  = C.ProductImageUrl 
-		,ProductName = C.ProductName
-		,ProductPrice = C.ProductPrice
-		,Quantity = C.Quantity
 		,UpdatedTime = GETDATE()
     FROM @Cart AS C
 	WHERE dbo.Cart.Id = @Id

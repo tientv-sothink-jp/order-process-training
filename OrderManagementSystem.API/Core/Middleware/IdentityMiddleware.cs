@@ -12,17 +12,15 @@ namespace OrderManagementSystem.API.Core.Middleware
     public class IdentityMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly IIdentityService _identityService;
 
-        public IdentityMiddleware(RequestDelegate next, IIdentityService identityService)
+        public IdentityMiddleware(RequestDelegate next)
         {
             _next = next;
-            _identityService = identityService;
         }
 
-        public Task Invoke(HttpContext httpContext)
+        public Task Invoke(HttpContext httpContext, IIdentityService identityService)
         {
-            this._identityService.User = httpContext.User;
+            identityService.User = httpContext.User;
             return _next(httpContext);
         }
     }
