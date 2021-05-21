@@ -9,7 +9,7 @@ namespace OrderManagementSystem.API.Services
     public interface IOrderService
     {
         List<Order> Get();
-        void Add(List<Order> orderItems);
+        Guid Add(List<Order> orderItems);
         void Edit(Guid id, List<Order> orderItems);
     }
     public class OrderService : IOrderService
@@ -21,9 +21,15 @@ namespace OrderManagementSystem.API.Services
             _orderRepository = orderRepository;
         }
 
-        public void Add(List<Order> orderItems)
+        public Guid Add(List<Order> orderItems)
         {
-            _orderRepository.Add(orderItems);
+            foreach(Order item in orderItems)
+            {
+                item.DateDelivered = DateTime.Now;
+                item.UpdatedTime = DateTime.Now;
+                item.CreatedTime = DateTime.Now;
+            }
+            return _orderRepository.Add(orderItems);
         }
 
         public void Edit(Guid id, List<Order> orderItems)

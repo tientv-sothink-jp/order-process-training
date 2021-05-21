@@ -9,7 +9,7 @@ namespace OrderManagementSystem.API.Helpers
     public static class ListExtension
     {
         public static DataTable ToDataTable<T>(this IEnumerable<T> list, string[] ColumnNames)
-        {
+        {    
             DataTable table = new DataTable();
             using (var reader = ObjectReader.Create<T>(list, ColumnNames))
             {

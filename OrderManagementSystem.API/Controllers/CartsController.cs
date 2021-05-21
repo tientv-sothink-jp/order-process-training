@@ -10,7 +10,7 @@ using System.Text;
 
 namespace OrderManagementSystem.API.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Guest")]
     [Route("api/[controller]")]
     public class CartsController: BaseApiController
     {
@@ -31,9 +31,16 @@ namespace OrderManagementSystem.API.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] List<Cart> cartItems)
+        public IActionResult Post([FromBody] List<Cart> cartItems)
         {
-            _cartService.Add(cartItems);
+            Guid guid = _cartService.Add(cartItems);
+
+            DataReponse.Description = "Thêm mới cart thành công";
+            DataReponse.Result = new
+            {
+                Id = guid
+            };
+            return Ok(DataReponse);
         }
 
         [HttpPut("{id}")]

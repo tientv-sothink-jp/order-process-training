@@ -12,6 +12,7 @@
         this.insertProduct = insertProduct;
         this.updateProduct = updateProduct;
         this.removeProduct = removeProduct;
+        this.removeProductByCartId = removeProductByCartId;
         this.getTotalPrice = getTotalPrice;
         this.getTotalQuantity = getTotalQuantity;
 
@@ -55,6 +56,10 @@
             return $http.delete(`api/CartDetail/${cartDetailId}`, {
                 headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
             })
+        }
+
+        function removeProductByCartId(cartId) {
+            
         }
 
         function getTotalPrice(carts) {

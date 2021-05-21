@@ -11,7 +11,6 @@ using OrderManagementSystem.Domain.Entities;
 
 namespace OrderManagementSystem.API.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CartDetailController : BaseApiController
@@ -28,6 +27,7 @@ namespace OrderManagementSystem.API.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "Admin, Guest")]
         [HttpGet("GetByCartId/{cartId}")]
         public IActionResult Get(Guid cartId)
         {
@@ -36,18 +36,21 @@ namespace OrderManagementSystem.API.Controllers
             return Ok(DataReponse);
         }
 
+        [Authorize(Roles = "Guest")]
         [HttpPost("")]
         public void Post(List<CartDetail> cartDetailItems)
         {
             _cartDetailService.Add(cartDetailItems);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public void Put(Guid id, List<CartDetail> cartDetailItems)
         {
             _cartDetailService.Edit(id, cartDetailItems);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public void Delete(Guid id)
         {

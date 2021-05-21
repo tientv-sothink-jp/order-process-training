@@ -13,7 +13,7 @@ namespace OrderManagementSystem.API.Repositories
     public interface IOrderRepository
     {
         List<Order> Get();
-        void Add(List<Order> orderItems);
+        Guid Add(List<Order> orderItems);
         void Edit(Guid id, List<Order> orderItems);
     }
     public class OrderRepository: IOrderRepository
@@ -25,7 +25,7 @@ namespace OrderManagementSystem.API.Repositories
             _orderManagementSystemContext = orderManagementSystemContext;
         }
 
-        public void Add(List<Order> orderItems)
+        public Guid Add(List<Order> orderItems)
         {
             string[] columnNames = { "Id", "DateDelivered", "Discount", "OrderStatusId", "CreatedTime", "UpdatedTime" };
 
@@ -35,8 +35,8 @@ namespace OrderManagementSystem.API.Repositories
 
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
 
-            conn.Prepare("[dbo].[AddOrder]", CommandType.StoredProcedure, new SqlParameter[] { parameter }).ExecuteNonQuery();
-            conn.Close();
+            var result = conn.Prepare("[dbo].[AddOrder]", CommandType.StoredProcedure, new SqlParameter[] { parameter }).ExecuteScalar();
+            return Guid.Parse(result.ToString());
         }
 
         public void Edit(Guid id, List<Order> orderItems)
@@ -53,9 +53,7 @@ namespace OrderManagementSystem.API.Repositories
             sqlParameters[1] = orderTableParameter;
 
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
-
             conn.Prepare("[dbo].[EditOrder]", CommandType.StoredProcedure, sqlParameters).ExecuteNonQuery();
-            conn.Close();
         }
 
         public List<Order> Get()

@@ -36,18 +36,22 @@
             cartService.getCart().then((response) => {
                 var cart = response.data.result;
                 if (!cart) {
-                    cartService.insertCart();
+                    cartService.insertCart().then((response) => {
+                        var newCart = response.data.result;
+                        cartDetailService.insertProduct(newCart.id, product.id, product.price, 1)
+                    })
+                } else {
+                    cartDetailService.getCartDetail(cart.id).then((response) => {
+                        var cartDetails = response.data.result;
+                        var cartDetailItem = _.find(cartDetails, x => x.productId == product.id);
+                        if (cartDetailItem) {
+                            cartDetailItem.quantity += 1;
+                            cartDetailService.updateProduct(cartDetailItem.id, cart.id, product.id, product.price, cartDetailItem.quantity)
+                        } else {
+                            cartDetailService.insertProduct(cart.id, product.id, product.price, 1)
+                        }
+                    })
                 }
-                cartDetailService.getCartDetail(cart.id).then((response) => {
-                    var cartDetails = response.data.result;
-                    var cartDetailItem = _.find(cartDetails, x => x.productId == product.id);
-                    if (cartDetailItem) {
-                        cartDetailItem.quantity += 1;
-                        cartDetailService.updateProduct(cartDetailItem.id, cart.id, product.id, product.price, cartDetailItem.quantity)
-                    } else {
-                        cartDetailService.insertProduct(cart.id, product.id, product.price, 1)
-                    }
-                })
             })
         }
     }

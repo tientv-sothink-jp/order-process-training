@@ -11,7 +11,7 @@ using System.Text;
 
 namespace OrderManagementSystem.API.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin, Guest")]
     [Route("api/[controller]")]
     public class ProductsController : BaseApiController
     {

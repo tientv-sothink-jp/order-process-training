@@ -92,3 +92,7 @@
 .form-checkout input[type = number]{
     -moz-appearance: textfield;
 }
+
+.order-detail-list img{
+    width: 45px;
+}

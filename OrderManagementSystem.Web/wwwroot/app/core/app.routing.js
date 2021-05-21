@@ -39,5 +39,10 @@
                 controllerAs: 'vm',
                 templateUrl: '../app/pages/order/order.view.html'
             })
+            .when("/orderDetail/:id", {
+                controller: 'orderDetailController',
+                controllerAs: 'vm',
+                templateUrl: '../app/pages/orderDetail/orderDetail.view.html'
+            })
     }
 })();

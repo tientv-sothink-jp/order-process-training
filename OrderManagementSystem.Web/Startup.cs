@@ -52,6 +52,7 @@ namespace OrderManagementSystem.Web
             services.AddScoped<ICartDetailRepository, CartDetailRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+            services.AddScoped<IOrderStatusRepository, OrderStatusRepository>();
 
             // Dependence ApiService
             //services.AddScoped<ICustomAuthenticationService, CustomAuthenticationService>();
@@ -62,6 +63,7 @@ namespace OrderManagementSystem.Web
             services.AddScoped<ICartDetailService, CartDetailService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IOrderDetailService, OrderDetailService>();
+            services.AddScoped<IOrderStatusService, OrderStatusService>();
 
             services.AddMvcCore()
                 .AddApiExplorer();
@@ -162,7 +164,6 @@ namespace OrderManagementSystem.Web
             app.UseRouting();
 
             app.UseAuthentication();
-
 
             app.UseAuthorization();
 

@@ -33,6 +33,7 @@
             cartService.getCart()
             .then((response) => {
                 vm.cart = response.data.result;
+                // console.log('cart', vm.cart);
                 localStorage.setItem('cart', JSON.stringify(vm.cart));
                 return cartDetailService.getCartDetail(vm.cart.id);
             })
@@ -43,11 +44,10 @@
             })
             .then((response) => {
                 vm.products = response.data.result;
-                // console.log('products', vm.products);
+                // console.log('product', vm.products);
                 vm.dataSource = _.chain(vm.cartDetail)
                                     .map((x) => {
                                         var product = _.find(vm.products, e => e.id == x.productId);
-                                        // console.log('product', product);
                                         x.productId = product.id;
                                         x.productImageUrl = product.imageUrl;
                                         x.productName = product.name;
