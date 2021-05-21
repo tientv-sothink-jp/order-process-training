@@ -1,0 +1,17 @@
+{
+  "name": "order-training",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "gulp",
+    "test": "gulp watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-less": "^4.0.1"
+  }
+}

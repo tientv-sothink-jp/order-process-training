@@ -1,0 +1,109 @@
+.login-view {
+    height         : 100vh;
+    display        : flex;
+    flex-direction : row;
+    align-items    : center;
+    justify-content: center;
+
+    .alert-danger {
+        font-size: 13px;
+    }
+}
+
+.card-login {
+    .card-header p {
+        margin     : 0;
+        font-size  : 26px;
+        font-weight: 600;
+    }
+
+    .card-body {
+        padding: 0 50px;
+
+        form input[type=text],
+        form input[type=password] {
+            border-radius: 20px;
+            margin       : 15px auto;
+            box-shadow   : inset 0 1px 3px #ddd;
+            /* padding   : 12px 0; */
+        }
+
+        form button {
+            margin       : 15px auto;
+            border-radius: 20px;
+            width        : 100%;
+        }
+    }
+}
+
+.product-item {
+    display       : flex;
+    flex-direction: row;
+    align-items   : center;
+    border        : 1px solid #ccc;
+    width         : 100%;
+    padding       : 5px;
+
+    .product-image {
+        width: 35%;
+
+        img {
+            width: 100%;
+        }
+    }
+
+
+    .product-content {
+        padding        : 5px;
+        display        : flex;
+        width          : 65%;
+        flex-direction : column;
+        justify-content: center;
+        margin         : auto;
+
+        span {
+            /* display: block; */
+            font-size: 14px;
+        }
+
+        .product-name {
+            white-space  : nowrap;
+            overflow     : hidden;
+            text-overflow: ellipsis;
+            font-size    : 16px;
+            font-weight  : bold;
+        }
+    }
+}
+
+.card-list {
+    table {
+        td:empty {
+            visibility: hidden;
+        }
+
+        img {
+            width: 35px;
+        }
+    }
+
+}
+
+.form-checkout {
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin            : 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+}
+
+.order-detail-list {
+    img {
+        width: 45px;
+    }
+}
