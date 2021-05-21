@@ -16,7 +16,7 @@ namespace OrderManagementSystem.API.Repositories
     {
         Cart Get(Guid userId);
  
-        void Add(List<Cart> cartItems);
+        Guid Add(List<Cart> cartItems);
         void Edit(Guid id, List<Cart> cartItem);
         void Delete(Guid id);
     }
@@ -42,7 +42,7 @@ namespace OrderManagementSystem.API.Repositories
             return _orderManagementSystemContext.Carts.Where(item => item.UserId == userId).SingleOrDefault();
         }
 
-        public void Add(List<Cart> cartItems)
+        public Guid Add(List<Cart> cartItems)
         {
             string[] columnNames = { "Id", "UserId", "CreatedTime", "UpdatedTime" };
 
@@ -52,8 +52,8 @@ namespace OrderManagementSystem.API.Repositories
 
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
 
-            conn.Prepare("[dbo].[AddCart]", CommandType.StoredProcedure, new SqlParameter[] { parameter}).ExecuteNonQuery();
-            conn.Close();
+            var result = conn.Prepare("[dbo].[AddCart]", CommandType.StoredProcedure, new SqlParameter[] { parameter}).ExecuteScalar();
+            return Guid.Parse(result.ToString());
         }
 
         public void Edit(Guid id, List<Cart> cartItems)

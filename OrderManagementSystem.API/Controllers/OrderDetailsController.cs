@@ -9,7 +9,7 @@ using System.Text;
 
 namespace OrderManagementSystem.API.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin, Guest")]
     [Route("api/[controller]")]
     public class OrderDetailsController: BaseApiController
     {
@@ -20,18 +20,18 @@ namespace OrderManagementSystem.API.Controllers
             _orderdetailservice = orderdetailservice;
         }
 
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("{orderId}")]
+        public IActionResult Get(Guid orderId)
         {
             DataReponse.Description = "Lấy danh sách OrderDetail thành công";
-            DataReponse.Result = _orderdetailservice.Get();
+            DataReponse.Result = _orderdetailservice.Get(orderId);
             return Ok(DataReponse);
         }
 
-        [HttpPost]
-        public void Post([FromBody] List<OrderDetail> orderDetailItems)
+        [HttpPost("{cartId}")]
+        public void Post(Guid cartId, [FromBody] List<OrderDetail> orderDetailItems)
         {
-            _orderdetailservice.Add(orderDetailItems);
+            _orderdetailservice.Add(cartId, orderDetailItems);
         }
     }
 }

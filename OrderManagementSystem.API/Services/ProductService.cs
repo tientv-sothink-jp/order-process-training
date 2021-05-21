@@ -11,7 +11,7 @@ namespace OrderManagementSystem.API.Services
     public interface IProductService
     {
         List<Product> GetProducts();
-        List<Product> GetProductList(PagingModel paging);
+        List<Product> GetProductPaging(PagingModel paging);
         List<Product> GetProducts(List<Guid> id);
         /// <summary>
         /// 
@@ -39,7 +39,7 @@ namespace OrderManagementSystem.API.Services
             return Guid.NewGuid();
         }
 
-        public List<Product> GetProductList(PagingModel paging)
+        public List<Product> GetProductPaging(PagingModel paging)
         {
             return _productrepository.Get(paging);
         }

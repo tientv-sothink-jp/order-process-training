@@ -12,8 +12,8 @@ namespace OrderManagementSystem.API.Repositories
 {
     public interface IOrderDetailRepository
     {
-        List<OrderDetail> Get();
-        void Add(List<OrderDetail> orderdetailItems);
+        List<OrderDetail> Get(Guid orderId);
+        void Add(Guid cartId, List<OrderDetail> orderdetailItems);
     }
     public class OrderDetailRepository: IOrderDetailRepository
     {
@@ -24,23 +24,33 @@ namespace OrderManagementSystem.API.Repositories
             _orderManagementSystemContext = orderManagementSystemContext;
         }
 
-        public void Add(List<OrderDetail> orderdetailItems)
+        public void Add(Guid cartID, List<OrderDetail> orderdetailItems)
         {
             string[] columnNames = { "Id", "OrderId", "ProductId", "ProductPrice", "Quantity", "CreatedTime", "UpdatedTime" };
 
-            var parameter = new SqlParameter("@OrderDetail", SqlDbType.Structured);
-            parameter.Value = orderdetailItems.ToDataTable(columnNames);
-            parameter.TypeName = "dbo.OrderDetailType";
+            var addOrderDetailParameter = new SqlParameter("@OrderDetail", SqlDbType.Structured);
+            addOrderDetailParameter.Value = orderdetailItems.ToDataTable(columnNames);
+            addOrderDetailParameter.TypeName = "dbo.OrderDetailType";
+
+            SqlParameter deleteCartDetailByCartIdParameter = new SqlParameter("@CartId", cartID);
 
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
-
-            conn.Prepare("[dbo].[AddOrderDetail]", CommandType.StoredProcedure, new SqlParameter[] { parameter }).ExecuteNonQuery();
-            conn.Close();
+            SqlTransaction transaction = conn.BeginTransaction();
+            try
+            {
+                conn.Prepare("[dbo].[AddOrderDetail]", CommandType.StoredProcedure, new SqlParameter[] { addOrderDetailParameter }, transaction).ExecuteNonQuery();
+                conn.Prepare("[dbo].[DeleteCartDetailByCartId]", CommandType.StoredProcedure, new SqlParameter[] { deleteCartDetailByCartIdParameter }, transaction).ExecuteNonQuery();
+                transaction.Commit();
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+            }
         }
 
-        public List<OrderDetail> Get()
+        public List<OrderDetail> Get(Guid orderId)
         {
-            return _orderManagementSystemContext.OrderDetails.ToList();
+            return _orderManagementSystemContext.OrderDetails.Where(x => x.OrderId == orderId).ToList();
         }
     }
 }

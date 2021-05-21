@@ -43,7 +43,7 @@ namespace OrderManagementSystem.Domain.EF
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -114,7 +114,7 @@ namespace OrderManagementSystem.Domain.EF
             {
                 entity.ToTable("OrderStatusMaster");
 
-                entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.CreatedTime)
                     .HasColumnType("datetime")

@@ -4,6 +4,6 @@
     [ProductId] UNIQUEIDENTIFIER NOT NULL,
     [ProductPrice] DECIMAL(18,2) NOT NULL,
     [Quantity] INT NOT NULL,
-    [CreatedTime] DATETIME NOT NULL,
+    [CreatedTime] DATETIME NULL,
     [UpdatedTime] DATETIME NULL
 )

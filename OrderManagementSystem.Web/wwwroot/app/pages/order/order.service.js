@@ -18,13 +18,13 @@
             })
          }
 
-         function addOrder(discount, orderStautusID) {
+         function addOrder(discount, orderStautusId) {
              var orderitem = {
-                DateDelivered: new Date(),
+                // DateDelivered: new Date(),
                 Discount: discount,
-                OrderStautusID: orderStautusID,
-                CreatedTime: new Date(),
-                UpdatedTime: new Date()
+                OrderStautusId: orderStautusId,
+                // CreatedTime: new Date(),
+                // UpdatedTime: new Date()
              }
              return $http.post(`api/Orders`, [orderitem], {
                 headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }

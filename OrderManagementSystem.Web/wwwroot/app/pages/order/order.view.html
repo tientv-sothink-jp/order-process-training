@@ -1,5 +1,24 @@
 <div ng-include="'../app/pages/layout/header.view.html'"></div>
 
-<div class="row">
-    
+<div class="order-list mt-3">
+    <table class="table table-bordered">
+        <thead class="text-center">
+          <tr>
+            <th scope="col">Order Id</th>
+            <th scope="col">Discount</th>
+            <th scope="col">orderStatusId</th>
+            <th scope="col">createdTime</th>
+            <th>Date Delivered</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          <tr ng-repeat="item in vm.dataSource" ng-dblclick="vm.goToOrderDetailPage(item.id)">
+              <td>{{item.id}}</td>
+              <td>{{item.discount}}</td>
+              <td>{{item.orderStatusName}}</td>
+              <td>{{item.createdTime}}</td>
+              <td>{{item.dateDelivered}}</td>
+          </tr>
+        </tbody>
+      </table>
 </div>

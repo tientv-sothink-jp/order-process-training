@@ -11,14 +11,18 @@
         this.getOrderDetail = getOrderDetail;
         this.addOrderDetail = addOrderDetail;
 
-        function getOrderDetail() {
-            return $http.get(`api/OrderDetails`, {
+        function getOrderDetail(orderId) {
+            return $http.get(`api/OrderDetails/${orderId}`, {
                 headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
             })
          }
 
-         function addOrderDetail(orderDetailItems) {
-            return $http.post(`api/OrderDetails`, orderDetailItems,{
+         function addOrderDetail(orderId, cartId, cartDetails) {
+            var orderDetailItems = _.chain(cartDetails).map((x) => {
+                x.OrderId = orderId
+                return x;
+            }).value();
+            return $http.post(`api/OrderDetails/${cartId}`, orderDetailItems,{
                 headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
             })
          }

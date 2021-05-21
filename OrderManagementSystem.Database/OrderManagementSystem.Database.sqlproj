@@ -86,19 +86,20 @@
     <Build Include="dbo\Programmability\StoreProcedures\AddOrder.sql" />
     <Build Include="dbo\Programmability\StoreProcedures\EditOrder.sql" />
     <Build Include="dbo\Tables\CartDetail.sql" />
+    <Build Include="dbo\Programmability\StoreProcedures\DeleteCartDetailByCartId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SampleData\InsertRoleMaster.sql" />
     <None Include="SampleData\InsertProduct.sql" />
     <None Include="SampleData\InsertOrderStatusMaster.sql" />
     <None Include="OrderManagementSystem.Database.publish.xml" />
-    <None Include="dbo\Programmability\StoreProcedures\AddOrderDetail.sql" />
+    <Build Include="dbo\Programmability\StoreProcedures\AddOrderDetail.sql" />
     <None Include="dbo\Programmability\StoreProcedures\EditOrderDetail.sql" />
-    <None Include="dbo\Programmability\Types\User-Defined Table Types\CartDetailType.sql" />
-    <None Include="dbo\Programmability\Types\User-Defined Table Types\OrderType.sql" />
-    <None Include="dbo\Programmability\Types\User-Defined Table Types\OrderDetailType.sql" />
-    <None Include="dbo\Programmability\StoreProcedures\AddCartDetail.sql" />
-    <None Include="dbo\Programmability\StoreProcedures\EditCartDetail.sql" />
+    <Build Include="dbo\Programmability\Types\User-Defined Table Types\CartDetailType.sql" />
+    <Build Include="dbo\Programmability\Types\User-Defined Table Types\OrderType.sql" />
+    <Build Include="dbo\Programmability\Types\User-Defined Table Types\OrderDetailType.sql" />
+    <Build Include="dbo\Programmability\StoreProcedures\AddCartDetail.sql" />
+    <Build Include="dbo\Programmability\StoreProcedures\EditCartDetail.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="OrderManagementSystem.Database.refactorlog" />

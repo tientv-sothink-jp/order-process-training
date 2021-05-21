@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\app\core\" />
+    <Folder Include="wwwroot\app\pages\orderManager\" />
     <Folder Include="wwwroot\app\pages\product\" />
     <Folder Include="wwwroot\app\pages\order\" />
     <Folder Include="wwwroot\app\services\" />

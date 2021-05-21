@@ -1,0 +1,28 @@
+<div ng-include="'../app/pages/layout/header.view.html'"></div>
+
+<div class="order-detail-list">
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Sản phẩm</th>
+            <th scope="col">Tên</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Xuất xứ</th>
+            <th scope="col">Tổng tiền</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="item in vm.dataSource">
+            <td class="text-center">
+                <img ng-src="{{item.productImageUrl}}" alt="">
+            </td>
+            <td>{{item.productName}}</td>
+            <td>{{item.productPrice  | currency}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.productOrigin}}</td>
+            <td>{{item.productPrice * item.quantity | currency}}</td>
+          </tr>
+        </tbody>
+      </table>
+</div>
