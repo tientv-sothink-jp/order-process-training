@@ -55,7 +55,6 @@ namespace OrderManagementSystem.API.Services
 
         public void Order(string stringCartDetailId)
         {
-            stringCartDetailId = stringCartDetailId.Remove(stringCartDetailId.Length - 1);
             var orderId = _orderRepository.Add(new Order
             {
                 DateDelivered = null,
