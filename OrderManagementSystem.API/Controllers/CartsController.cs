@@ -5,6 +5,7 @@ using OrderManagementSystem.API.Models;
 using OrderManagementSystem.API.Services;
 using OrderManagementSystem.Domain.Entities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -52,6 +53,14 @@ namespace OrderManagementSystem.API.Controllers
         public void Delete(Guid id)
         {
             _cartService.Delete(id);
+        }
+        [HttpPost("Order/{orderId}/cartDetail/{stringCartDetailId}")]
+        public IActionResult Post(string stringCartDetailId)
+        {
+            _cartService.Order(stringCartDetailId);
+            DataReponse.Description = "Order thành công";
+            DataReponse.Result = new ArrayList();
+            return Ok(DataReponse);
         }
     }
 }

@@ -18,18 +18,6 @@ namespace OrderManagementSystem.API.Repositories
             _orderManagementSystemContext = orderManagementSystem;
         }
 
-        public UserRole Get(Guid userId)
-        {
-            UserRole userRole;
-            try
-            {
-                userRole = _orderManagementSystemContext.UserRoles.Where(item => item.UserId == userId).SingleOrDefault();
-            }
-            catch (Exception)
-            {
-                userRole = null;
-            }
-            return userRole;
-        }
+        public UserRole Get(Guid userId) => _orderManagementSystemContext.UserRoles.Where(item => item.UserId == userId).SingleOrDefault();
     }
 }

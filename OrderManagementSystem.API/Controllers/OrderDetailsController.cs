@@ -9,7 +9,7 @@ using System.Text;
 
 namespace OrderManagementSystem.API.Controllers
 {
-    [Authorize(Roles ="Admin, Guest")]
+    [Authorize(Roles = "Admin, Guest")]
     [Route("api/[controller]")]
     public class OrderDetailsController: BaseApiController
     {
@@ -28,10 +28,10 @@ namespace OrderManagementSystem.API.Controllers
             return Ok(DataReponse);
         }
 
-        [HttpPost("{cartId}")]
-        public void Post(Guid cartId, [FromBody] List<OrderDetail> orderDetailItems)
+        [HttpPost]
+        public void Post([FromBody] List<OrderDetail> orderDetailItems)
         {
-            _orderdetailservice.Add(cartId, orderDetailItems);
+            _orderdetailservice.Add(orderDetailItems);
         }
     }
 }

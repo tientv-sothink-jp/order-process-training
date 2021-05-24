@@ -10,10 +10,12 @@
     function orderStatusService($http) {
         this.getOrderStatus = getOrderStatus;
 
+        var headerRequest = {
+            headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
+        }
+
         function getOrderStatus() { 
-            return $http.get("api/OrderStatus", {
-                headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
-            });
+            return $http.get("api/OrderStatus", headerRequest);
         }
     }
 })();

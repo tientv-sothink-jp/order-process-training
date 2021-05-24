@@ -87,6 +87,7 @@
     <Build Include="dbo\Programmability\StoreProcedures\EditOrder.sql" />
     <Build Include="dbo\Tables\CartDetail.sql" />
     <Build Include="dbo\Programmability\StoreProcedures\DeleteCartDetailByCartId.sql" />
+    <Build Include="dbo\Programmability\StoreProcedures\DeleteCartDetailById.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SampleData\InsertRoleMaster.sql" />

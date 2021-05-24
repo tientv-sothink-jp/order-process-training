@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using OrderManagementSystem.API.Core;
 using OrderManagementSystem.API.Helpers;
 using OrderManagementSystem.API.Models;
 using OrderManagementSystem.API.Repositories;
@@ -21,11 +22,15 @@ namespace OrderManagementSystem.API.Services
         private IUserRepository _userrepository;
         private IUserRoleRepository _userRoleRepository;
         private IRoleMasterRepository _roleMasterRepository;
-        public UserService(IUserRepository userRepository, IUserRoleRepository userRoleRepository, IRoleMasterRepository roleMasterRepository, IConfiguration configuration) : base(configuration)
+        private ICartRepository _cartRepository;
+        public UserService(IUserRepository userRepository, IUserRoleRepository userRoleRepository, 
+            IRoleMasterRepository roleMasterRepository, IConfiguration configuration,
+            ICartRepository cartRepository) : base(configuration)
         {
             _userrepository = userRepository;
             _userRoleRepository = userRoleRepository;
             _roleMasterRepository = roleMasterRepository;
+            _cartRepository = cartRepository;
         }
 
         public User Get(Guid userId)
@@ -52,13 +57,16 @@ namespace OrderManagementSystem.API.Services
             {
                 return null;
             }
-            
+
+            var cartId = _cartRepository.Get(user.Id).Id;
+
             var claims = new List<Claim>()
                         {
-                            new Claim(ClaimTypes.NameIdentifier, user.UserName),
-                            new Claim(ClaimTypes.Name, user.Name),
+                            new Claim(ClaimTypes.Name, user.Name.ToString()),
+                            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                             new Claim(ClaimTypes.Role, roleMaster.Name),
-                            new Claim(ClaimTypes.Email, user.Email)
+                            new Claim(ClaimTypes.Email, user.Email),
+                            new Claim(CustomClaimTypes.Cart, cartId.ToString()),
                         };
             user.Token = this.GenerateToken(claims);
             user.RefreshToken = this.GenerateRefreshToken();

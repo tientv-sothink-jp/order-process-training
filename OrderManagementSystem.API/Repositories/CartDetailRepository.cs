@@ -12,11 +12,14 @@ namespace OrderManagementSystem.API.Repositories
     public interface ICartDetailRepository
     {
         List<CartDetail> Get();
-        List<CartDetail> GetByCartId(Guid cartId);
+        List<CartDetail> GetByCartId(Guid cartId, List<Product> productItems);
         CartDetail Get(Guid id);
+        List<CartDetail> Get(List<string> CartDetailId);
         void Add(List<CartDetail> cartDetailItems);
         void Edit(Guid id, List<CartDetail> cartDetailItems);
         void Delete(Guid id);
+        void RemoveCartDetailsOrdered(List<Guid> cartIdDetails);
+        void RemoveCartDetailById(string cartDettails);
     }
     public class CartDetailRepository : ICartDetailRepository
     {
@@ -51,13 +54,16 @@ namespace OrderManagementSystem.API.Repositories
         public void Edit(Guid id, List<CartDetail> cartDetailItems)
         {
             string[] columnNames = { "Id", "CartId", "ProductId", "ProductPrice", "Quantity", "CreatedTime", "UpdatedTime" };
-            var cartDetailTable = new SqlParameter("@CartDetail", SqlDbType.Structured);
-            cartDetailTable.Value = cartDetailItems.ToDataTable(columnNames);
-            cartDetailTable.TypeName = "dbo.CartDetailType";
 
-            SqlParameter[] sqlParameters = new SqlParameter[2];
-            sqlParameters[0] = new SqlParameter("Id", id);
-            sqlParameters[1] = cartDetailTable;
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("Id", id),
+                new SqlParameter("@CartDetail", SqlDbType.Structured)
+                {
+                    Value = cartDetailItems.ToDataTable(columnNames),
+                    TypeName = "dbo.CartDetailType"
+                }
+            };
 
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
             conn.Prepare("[dbo].[EditCartDetail]", CommandType.StoredProcedure, sqlParameters).ExecuteNonQuery();
@@ -74,9 +80,30 @@ namespace OrderManagementSystem.API.Repositories
             throw new NotImplementedException();
         }
 
+        public List<CartDetail> Get(List<string> CartDetailId)
+        {
+            return _orderManagementSystemContext.CartDetails.Where(x => CartDetailId.Contains(x.Id.ToString())).ToList();
+        }
+
         public List<CartDetail> GetByCartId(Guid cartId)
         {
             return _orderManagementSystemContext.CartDetails.Where(x => x.CartId == cartId).ToList();
+        }
+
+        public List<CartDetail> GetByCartId(Guid cartId, List<Product> productItems)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveCartDetailById(string stringCartDetailId)
+        {
+            SqlParameter deleteCartDetailByCartIdParameter = new SqlParameter("@id", stringCartDetailId);
+            SqlConnection conn = _orderManagementSystemContext.DbConnection;
+        }
+
+        public void RemoveCartDetailsOrdered(List<Guid> cartIdDetailItems)
+        {
+            //var cartDetails = _orderManagementSystemContext.CartDetails.Where<>
         }
     }
 }

@@ -43,14 +43,14 @@ namespace OrderManagementSystem.API.Controllers
             _cartDetailService.Add(cartDetailItems);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Guest")]
         [HttpPut("{id}")]
         public void Put(Guid id, List<CartDetail> cartDetailItems)
         {
             _cartDetailService.Edit(id, cartDetailItems);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Guest")]
         [HttpDelete("{id}")]
         public void Delete(Guid id)
         {

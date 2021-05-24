@@ -20,18 +20,7 @@ namespace OrderManagementSystem.API.Repositories
             _orderManagementSystemContext = orderManagementSystem;
         }
 
-        public RoleMaster Get(Guid roleId)
-        {
-            RoleMaster roleMaster;
-            try
-            {
-                roleMaster = _orderManagementSystemContext.RoleMasters.Where(item => item.Id == roleId).SingleOrDefault();
-            }
-            catch (Exception)
-            {
-                roleMaster = null;
-            }
-            return roleMaster;
-        }
+        public RoleMaster Get(Guid roleId) => _orderManagementSystemContext.RoleMasters.Where(item => item.Id == roleId).SingleOrDefault();
+
     }
 }
