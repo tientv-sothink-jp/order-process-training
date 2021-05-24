@@ -8,10 +8,10 @@ namespace OrderManagementSystem.API.Helpers
 {
     public static class ListExtension
     {
-        public static DataTable ToDataTable<T>(this IEnumerable<T> list, string[] ColumnNames)
+        public static DataTable ToDataTable<T>(this IEnumerable<T> list, params string[] columnNames)
         {    
             DataTable table = new DataTable();
-            using (var reader = ObjectReader.Create<T>(list, ColumnNames))
+            using (var reader = ObjectReader.Create<T>(list, columnNames))
             {
                 table.Load(reader);
             }

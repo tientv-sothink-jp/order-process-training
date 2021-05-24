@@ -10,7 +10,7 @@ namespace OrderManagementSystem.API.Repositories
     public interface IRoleMasterRepository
     {
         RoleMaster Get(Guid roleId);
-    }
+    } 
 
     public class RoleMasterRepository: IRoleMasterRepository
     {

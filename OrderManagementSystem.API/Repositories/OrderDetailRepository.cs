@@ -17,7 +17,7 @@ namespace OrderManagementSystem.API.Repositories
     }
     public class OrderDetailRepository: IOrderDetailRepository
     {
-        private OrderManagementSystemContext _orderManagementSystemContext;
+        private readonly OrderManagementSystemContext _orderManagementSystemContext;
 
         public OrderDetailRepository(OrderManagementSystemContext orderManagementSystemContext)
         {
@@ -26,18 +26,24 @@ namespace OrderManagementSystem.API.Repositories
 
         public void Add(List<OrderDetail> orderdetailItems)
         {
-            string[] columnNames = { "Id", "OrderId", "ProductId", "ProductPrice", "Quantity", "CreatedTime", "UpdatedTime" };
-            var addOrderDetailParameter = new SqlParameter("@OrderDetail", SqlDbType.Structured)
-            {
-                Value = orderdetailItems.ToDataTable(columnNames),
-                TypeName = "dbo.OrderDetailType"
-            };
+            var addOrderDetailParameter =
+                new SqlParameter[]
+                {
+                    new SqlParameter()
+                    {
+                        ParameterName = "@OrderDetail",
+                        SqlDbType = SqlDbType.Structured,
+                        Value = orderdetailItems.ToDataTable("Id", "OrderId", "ProductId", "ProductPrice", "Quantity"),
+                        TypeName = "dbo.OrderDetailType"
+                    }
+                };
+            
 
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
             SqlTransaction transaction = conn.BeginTransaction();
             try
             {
-                conn.Prepare("[dbo].[AddOrderDetail]", CommandType.StoredProcedure, new SqlParameter[] { addOrderDetailParameter }, transaction).ExecuteNonQuery();
+                conn.Prepare("[dbo].[AddOrderDetail]", CommandType.StoredProcedure, addOrderDetailParameter , transaction).ExecuteNonQuery();
                 transaction.Commit();
             }
             catch (Exception)
@@ -48,7 +54,7 @@ namespace OrderManagementSystem.API.Repositories
 
         //public void Add(Guid cartID, List<OrderDetail> orderdetailItems)
         //{
-        //    string[] columnNames = { "Id", "OrderId", "ProductId", "ProductPrice", "Quantity", "CreatedTime", "UpdatedTime" };
+        //    string[] columnNames = { "Id", "OrderId", "ProductId", "ProductPrice", "Quantity" };
 
             //    var addOrderDetailParameter = new SqlParameter("@OrderDetail", SqlDbType.Structured)
             //    {

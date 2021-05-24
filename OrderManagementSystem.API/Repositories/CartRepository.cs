@@ -19,7 +19,6 @@ namespace OrderManagementSystem.API.Repositories
         Guid Add(List<Cart> cartItems);
         void Edit(Guid id, List<Cart> cartItem);
         void Delete(Guid id);
-        void Order(string stringCartDetailId, List<OrderDetail> orderdetailItems);
     }
 
     public class CartRepository: ICartRepository
@@ -55,11 +54,11 @@ namespace OrderManagementSystem.API.Repositories
 
         public Guid Add(List<Cart> cartItems)
         {
-            string[] columnNames = { "Id", "UserId", "CreatedTime", "UpdatedTime" };
-
-            var parameter = new SqlParameter("@Cart", SqlDbType.Structured)
+            var parameter = new SqlParameter()
             {
-                Value = cartItems.ToDataTable(columnNames),
+                ParameterName = "@Cart",
+                SqlDbType = SqlDbType.Structured,
+                Value = cartItems.ToDataTable("Id", "UserId"),
                 TypeName = "dbo.CartType"
             };
 
@@ -71,48 +70,22 @@ namespace OrderManagementSystem.API.Repositories
 
         public void Edit(Guid id, List<Cart> cartItems)
         {
-            string[] columnNames = { "Id", "UserId", "CreatedTime", "UpdatedTime" };
-
-            SqlParameter[] sqlParameters = new SqlParameter[2];
-
-            var cartTableParameter = new SqlParameter("@Cart", SqlDbType.Structured);
-            cartTableParameter.Value = cartItems.ToDataTable(columnNames);
-            cartTableParameter.TypeName = "dbo.CartType";
-
-            sqlParameters[0] = new SqlParameter("Id", id);
-            sqlParameters[1] = cartTableParameter;
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("Id", id),
+                new SqlParameter()
+                {
+                    ParameterName = "@Cart",
+                    SqlDbType = SqlDbType.Structured,
+                    Value = cartItems.ToDataTable("Id", "UserId"),
+                    TypeName = "dbo.CartType"
+                }
+            };
 
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
 
             conn.Prepare("[dbo].[EditCart]", CommandType.StoredProcedure, sqlParameters).ExecuteNonQuery();
             conn.Close();
-        }
-
-        public void Order(string stringCartDetailId, List<OrderDetail> orderdetailItems)
-        {
-            string[] columnNames = { "Id", "OrderId", "ProductId", "ProductPrice", "Quantity", "CreatedTime", "UpdatedTime" };
-
-            var addOrderDetailParameter = new SqlParameter("@OrderDetail", SqlDbType.Structured)
-            {
-                Value = orderdetailItems.ToDataTable(columnNames),
-                TypeName = "dbo.OrderDetailType"
-            };
-
-            SqlParameter deleteCartDetailByCartIdParameter = new SqlParameter("@StringCartDetailId", stringCartDetailId);
-
-            SqlConnection conn = _orderManagementSystemContext.DbConnection;
-            SqlTransaction transaction = conn.BeginTransaction();
-
-            try
-            {
-                conn.Prepare("[dbo].[AddOrderDetail]", CommandType.StoredProcedure, new SqlParameter[] { addOrderDetailParameter }, transaction).ExecuteNonQuery();
-                conn.Prepare("[dbo].[DeleteCartDetailById]", CommandType.StoredProcedure, new SqlParameter[] { deleteCartDetailByCartIdParameter }, transaction).ExecuteNonQuery();
-                transaction.Commit();
-            }
-            catch (Exception)
-            {
-                transaction.Rollback();
-            }
         }
     }
 }

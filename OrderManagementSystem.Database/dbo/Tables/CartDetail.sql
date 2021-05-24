@@ -5,6 +5,6 @@
     [ProductId] UNIQUEIDENTIFIER NOT NULL,
     [ProductPrice] DECIMAL(18,2) NOT NULL,
     [Quantity] INT NOT NULL,
-    [CreatedTime] DATETIME DEFAULT GETDATE(),
+    [CreatedTime] DATETIME DEFAULT GETDATE() NOT NULL,
     [UpdatedTime] DATETIME,
 )

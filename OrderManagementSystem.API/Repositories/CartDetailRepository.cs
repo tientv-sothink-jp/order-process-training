@@ -12,7 +12,7 @@ namespace OrderManagementSystem.API.Repositories
     public interface ICartDetailRepository
     {
         List<CartDetail> Get();
-        List<CartDetail> GetByCartId(Guid cartId, List<Product> productItems);
+        List<CartDetail> GetByCartId(Guid cartId);
         CartDetail Get(Guid id);
         List<CartDetail> Get(List<string> CartDetailId);
         void Add(List<CartDetail> cartDetailItems);
@@ -32,11 +32,13 @@ namespace OrderManagementSystem.API.Repositories
 
         public void Add(List<CartDetail> cartDetailItems)
         {
-            string[] columnNames = { "Id", "CartId", "ProductId", "ProductPrice", "Quantity", "CreatedTime", "UpdatedTime" };
-
-            var cartDetailTable = new SqlParameter("@CartDetail", SqlDbType.Structured);
-            cartDetailTable.Value = cartDetailItems.ToDataTable(columnNames);
-            cartDetailTable.TypeName = "dbo.CartDetailType";
+            var cartDetailTable = new SqlParameter
+            {
+                ParameterName = "@CartDetail",
+                SqlDbType = SqlDbType.Structured,
+                Value = cartDetailItems.ToDataTable("Id", "CartId", "ProductId", "ProductPrice", "Quantity"),
+                TypeName = "dbo.CartDetailType"
+            };
 
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
 
@@ -53,14 +55,14 @@ namespace OrderManagementSystem.API.Repositories
 
         public void Edit(Guid id, List<CartDetail> cartDetailItems)
         {
-            string[] columnNames = { "Id", "CartId", "ProductId", "ProductPrice", "Quantity", "CreatedTime", "UpdatedTime" };
-
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("Id", id),
-                new SqlParameter("@CartDetail", SqlDbType.Structured)
+                new SqlParameter()
                 {
-                    Value = cartDetailItems.ToDataTable(columnNames),
+                    ParameterName = "@CartDetail",
+                    SqlDbType = SqlDbType.Structured,
+                    Value = cartDetailItems.ToDataTable("Id", "CartId", "ProductId", "ProductPrice", "Quantity"),
                     TypeName = "dbo.CartDetailType"
                 }
             };
@@ -97,8 +99,10 @@ namespace OrderManagementSystem.API.Repositories
 
         public void RemoveCartDetailById(string stringCartDetailId)
         {
-            SqlParameter deleteCartDetailByCartIdParameter = new SqlParameter("@id", stringCartDetailId);
+            SqlParameter deleteCartDetailByCartId = new SqlParameter("@id", stringCartDetailId);
+
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
+            conn.Prepare("[dbo].[DeleteCartDetailById]", CommandType.StoredProcedure, new SqlParameter[] { deleteCartDetailByCartId }).ExecuteNonQuery();
         }
 
         public void RemoveCartDetailsOrdered(List<Guid> cartIdDetailItems)

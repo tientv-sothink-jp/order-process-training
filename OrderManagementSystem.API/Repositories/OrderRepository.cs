@@ -28,17 +28,17 @@ namespace OrderManagementSystem.API.Repositories
 
         public Guid Add(List<Order> orderItems)
         {
-            string[] columnNames = { "Id", "DateDelivered", "Discount", "OrderStatusId", "CreatedTime", "UpdatedTime" };
-
-            var parameter = new SqlParameter("@Order", SqlDbType.Structured)
+            var parameter = new SqlParameter()
             {
-                Value = orderItems.ToDataTable(columnNames),
+                ParameterName = "@Order",
+                SqlDbType = SqlDbType.Structured,
+                Value = orderItems.ToDataTable("Id", "DateDelivered", "Discount", "OrderStatusId" ),
                 TypeName = "dbo.OrderType"
             };
 
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
-
             var result = conn.Prepare("[dbo].[AddOrder]", CommandType.StoredProcedure, new SqlParameter[] { parameter }).ExecuteScalar();
+            
             return Guid.Parse(result.ToString());
         }
 
@@ -51,14 +51,14 @@ namespace OrderManagementSystem.API.Repositories
 
         public void Edit(Guid id, List<Order> orderItems)
         {
-            string[] columnNames = { "Id", "DateDelivered", "Discount", "OrderStatusId", "CreatedTime", "UpdatedTime" };
-
             SqlParameter[] sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("Id", id),
-                new SqlParameter("@Order", SqlDbType.Structured)
+                new SqlParameter()
                 {
-                    Value = orderItems.ToDataTable(columnNames),
+                    ParameterName = "@Order",
+                    SqlDbType = SqlDbType.Structured,
+                    Value = orderItems.ToDataTable("Id", "DateDelivered", "Discount", "OrderStatusId"),
                     TypeName = "dbo.OrderType"
                 }
             };
