@@ -11,10 +11,12 @@
         this.getOrderDetail = getOrderDetail;
         this.addOrderDetail = addOrderDetail;
 
+        var headerRequest = {
+            headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
+        }
+
         function getOrderDetail(orderId) {
-            return $http.get(`api/OrderDetails/${orderId}`, {
-                headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
-            })
+            return $http.get(`api/OrderDetails/${orderId}`, headerRequest)
          }
 
          function addOrderDetail(orderId, cartId, cartDetails) {
@@ -22,9 +24,7 @@
                 x.OrderId = orderId
                 return x;
             }).value();
-            return $http.post(`api/OrderDetails/${cartId}`, orderDetailItems,{
-                headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
-            })
+            return $http.post(`api/OrderDetails/${cartId}`, orderDetailItems,headerRequest)
          }
     }
 })();

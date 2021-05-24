@@ -9,7 +9,7 @@ namespace OrderManagementSystem.API.Services
     public interface IOrderDetailService
     {
         List<OrderDetail> Get(Guid orderId);
-        void Add(Guid cartId, List<OrderDetail> orderDetailItems);
+        void Add(List<OrderDetail> orderDetailItems);
     }
     public class OrderDetailService : IOrderDetailService
     {
@@ -20,9 +20,9 @@ namespace OrderManagementSystem.API.Services
             _orderDetailRepository = orderDetailRepository;
         }
 
-        public void Add(Guid cartId, List<OrderDetail> orderDetailItems)
+        public void Add(List<OrderDetail> orderDetailItems)
         {
-            _orderDetailRepository.Add(cartId, orderDetailItems);
+            _orderDetailRepository.Add(orderDetailItems);
         }
 
         public List<OrderDetail> Get(Guid orderId)

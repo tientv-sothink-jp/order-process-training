@@ -13,25 +13,17 @@
 
         this.productList = [];
 
-        /*
-        [{
-            id: string, //product id
-            quantity: number
-        }]
-        */
+        var headerRequest = {
+            headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
+        }
 
         function getCart() {
             return $http.get(
-                `api/Carts/${JSON.parse(localStorage.getItem('user')).id}`,
-                {
-                    headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
-                });
+                `api/Carts/${JSON.parse(localStorage.getItem('user')).id}`, headerRequest);
         }
 
         function insertCart() {
-            return $http.post(`api/Carts`, [{userId : JSON.parse(localStorage.getItem('user')).id}], {
-                headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
-            })
+            return $http.post(`api/Carts`, [{ userId: JSON.parse(localStorage.getItem('user')).id }], headerRequest)
         }
 
         // function addProduct(productItem, quantity) {
@@ -49,8 +41,8 @@
         //     this.setCart(cart);
         // }
 
-        
 
-        
+
+
     }
 })();

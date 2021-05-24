@@ -14,6 +14,7 @@ namespace OrderManagementSystem.API.Repositories
     {
         List<Order> Get();
         Guid Add(List<Order> orderItems);
+        Guid Add(Order item);
         void Edit(Guid id, List<Order> orderItems);
     }
     public class OrderRepository: IOrderRepository
@@ -29,9 +30,11 @@ namespace OrderManagementSystem.API.Repositories
         {
             string[] columnNames = { "Id", "DateDelivered", "Discount", "OrderStatusId", "CreatedTime", "UpdatedTime" };
 
-            var parameter = new SqlParameter("@Order", SqlDbType.Structured);
-            parameter.Value = orderItems.ToDataTable(columnNames);
-            parameter.TypeName = "dbo.OrderType";
+            var parameter = new SqlParameter("@Order", SqlDbType.Structured)
+            {
+                Value = orderItems.ToDataTable(columnNames),
+                TypeName = "dbo.OrderType"
+            };
 
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
 
@@ -39,18 +42,26 @@ namespace OrderManagementSystem.API.Repositories
             return Guid.Parse(result.ToString());
         }
 
+        public Guid Add(Order item)
+        {
+            return this.Add(new List<Order> {
+                item
+            });
+        }
+
         public void Edit(Guid id, List<Order> orderItems)
         {
             string[] columnNames = { "Id", "DateDelivered", "Discount", "OrderStatusId", "CreatedTime", "UpdatedTime" };
 
-            SqlParameter[] sqlParameters = new SqlParameter[2];
-
-            var orderTableParameter = new SqlParameter("@Order", SqlDbType.Structured);
-            orderTableParameter.Value = orderItems.ToDataTable(columnNames);
-            orderTableParameter.TypeName = "dbo.OrderType";
-
-            sqlParameters[0] = new SqlParameter("Id", id);
-            sqlParameters[1] = orderTableParameter;
+            SqlParameter[] sqlParameters = new SqlParameter[]
+            {
+                new SqlParameter("Id", id),
+                new SqlParameter("@Order", SqlDbType.Structured)
+                {
+                    Value = orderItems.ToDataTable(columnNames),
+                    TypeName = "dbo.OrderType"
+                }
+            };
 
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
             conn.Prepare("[dbo].[EditOrder]", CommandType.StoredProcedure, sqlParameters).ExecuteNonQuery();

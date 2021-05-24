@@ -11,20 +11,18 @@
         this.getProductList = getProductList;
         this.getProducts = getProducts
 
+        var headerRequest = {
+            headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
+        }
+
         function getProductList() {
             return $http.get(
-                'api/Products', 
-                { headers: 
-                    { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
-                });
+                'api/Products', headerRequest);
         }
         
         function getProducts(id) {
             return $http.get(
-                `api/Products/${encodeURIComponent(id)}`, 
-                { headers: 
-                    { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
-                });
+                `api/Products/${encodeURIComponent(id)}`, headerRequest);
          }
     }
 })();

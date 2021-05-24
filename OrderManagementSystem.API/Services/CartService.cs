@@ -1,7 +1,9 @@
-﻿using OrderManagementSystem.API.Repositories;
+﻿using OrderManagementSystem.API.Core.Services;
+using OrderManagementSystem.API.Repositories;
 using OrderManagementSystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace OrderManagementSystem.API.Services
@@ -12,22 +14,25 @@ namespace OrderManagementSystem.API.Services
         Guid Add(List<Cart> cartItems);
         void Edit(Guid id, List<Cart> cartItem);
         void Delete(Guid id);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cartId"></param>
-        /// <param name="products"></param>
-        /// <returns>Order ID</returns>
-        Guid Order(Guid cartId, List<Guid> products);
+        void Order(string stringCartDetailId);
     }
-    public class CartService : ICartService
+    public class CartService : BaseService, ICartService
     {
         private ICartRepository _cartRepository;
-
-        public CartService(ICartRepository cartRepository)
+        private IProductRepository _productRepository;
+        private ICartDetailRepository _cartDetailRepository;
+        private IOrderRepository _orderRepository;
+        private IOrderDetailRepository _orderDetailRepository;
+        public CartService(ICartRepository cartRepository, IProductRepository productRepository, ICartDetailRepository cartDetailRepository,
+            IOrderRepository orderRepository, IIdentityService identityService,
+            IOrderDetailRepository orderDetailRepository)
+            : base(identityService)
         {
             _cartRepository = cartRepository;
+            _productRepository = productRepository;
+            _cartDetailRepository = cartDetailRepository;
+            _orderRepository = orderRepository;
+            _orderDetailRepository = orderDetailRepository;
         }
 
         public void Delete(Guid id)
@@ -50,9 +55,32 @@ namespace OrderManagementSystem.API.Services
             _cartRepository.Edit(id, cartItems);
         }
 
-        public Guid Order(Guid cartId, List<Guid> products)
+        public void Order(string stringCartDetailId)
         {
-            throw new NotImplementedException();
+            var orderId = _orderRepository.Add(new Order
+            {
+                DateDelivered = null,
+                Discount = 0,
+                OrderStatusId = 1,
+                CreatedTime = DateTime.Now,
+                UpdatedTime = DateTime.Now
+            });
+
+            var orderDetails = _cartDetailRepository
+                .Get(stringCartDetailId.Split(",").ToList())
+                .Select((x) => new OrderDetail
+                {
+                    OrderId = orderId,
+                    ProductId = x.ProductId,
+                    ProductPrice = x.ProductPrice,
+                    Quantity = x.Quantity,
+                    CreatedTime = DateTime.Now,
+                    UpdatedTime = DateTime.Now
+                })
+                .ToList();
+
+            _orderDetailRepository.Add(orderDetails);
+            _cartDetailRepository.RemoveCartDetailById(stringCartDetailId);
         }
     }
 }

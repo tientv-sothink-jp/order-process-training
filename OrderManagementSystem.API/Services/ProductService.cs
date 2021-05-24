@@ -33,8 +33,8 @@ namespace OrderManagementSystem.API.Services
 
         public Guid AddToCart(Product product, int quantity)
         {
-            var x = IdentityService.User;
-            var y = IdentityService.Name;
+            var x = identityService.User;
+            //var y = IdentityService.Name;
 
             return Guid.NewGuid();
         }

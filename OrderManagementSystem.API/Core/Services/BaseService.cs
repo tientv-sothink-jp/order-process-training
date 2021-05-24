@@ -6,11 +6,11 @@ namespace OrderManagementSystem.API.Core.Services
 {
     public class BaseService
     {
-        protected IIdentityService IdentityService;
+        protected IIdentityService identityService;
 
         public BaseService(IIdentityService identityService)
         {
-            this.IdentityService = identityService;
+            this.identityService = identityService;
         }
     }
 }

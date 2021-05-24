@@ -50,7 +50,8 @@ namespace OrderManagementSystem.API.Services
 
         public List<CartDetail> GetByCartId(Guid cartId)
         {
-            return _cartDetailRepository.GetByCartId(cartId);
+            throw new NotImplementedException();
+            //return _cartDetailRepository.GetByCartId(cartId);
         }
     }
 }

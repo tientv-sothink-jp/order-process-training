@@ -12,10 +12,12 @@
         this.addOrder = addOrder;
         this.editOrder = editOrder;
 
+        var headerRequest = {
+            headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
+        }
+
         function getOrder() {
-            return $http.get(`api/Orders`, {
-                headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
-            })
+            return $http.get(`api/Orders`, headerRequest)
          }
 
          function addOrder(discount, orderStautusId) {
@@ -26,15 +28,11 @@
                 // CreatedTime: new Date(),
                 // UpdatedTime: new Date()
              }
-             return $http.post(`api/Orders`, [orderitem], {
-                headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
-             })
+             return $http.post(`api/Orders`, [orderitem], headerRequest)
          }
 
          function editOrder(orderItems) {
-             return $http.put(`api/Orders`, orderItems, {
-                headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')).token}` }
-             })
+             return $http.put(`api/Orders`, orderItems, headerRequest)
          }
     }
 })();
