@@ -13,7 +13,7 @@ namespace OrderManagementSystem.API.Controllers
     [Route("api/[controller]")]
     public class OrderDetailsController: BaseApiController
     {
-        private IOrderDetailService _orderdetailservice;
+        private readonly IOrderDetailService _orderdetailservice;
 
         public OrderDetailsController(IOrderDetailService orderdetailservice)
         {

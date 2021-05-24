@@ -28,22 +28,30 @@
 
          function checkout() {
 
-             orderService.addOrder(1, 0).then((response)=>
-             {
-                 vm.order = response.data.result;
-                 return cartDetailService.getCartDetail(JSON.parse(localStorage.getItem('cart')).id);
-             }).then((response) => {
-                 vm.cartDetails = response.data.result;
-                 return orderDetailService.addOrderDetail(vm.order.id, JSON.parse(localStorage.getItem('cart')).id, vm.cartDetails);
-             }).then((response) => 
-             {
-                $location.path("/order");
-             })
-             .catch((error) => 
-             {
-                 console.log(error)
-             }
-             );
+            checkoutService.checkoutAndOrder(localStorage.getItem('stringCartDetailId')).then(
+                (response) => {
+                    $location.path('/cart');
+                },
+                (error) => {
+                    console.log(error);
+                }
+            )
+            //  orderService.addOrder(1, 0).then((response)=>
+            //  {
+            //      vm.order = response.data.result;
+            //      return cartDetailService.getCartDetail(JSON.parse(localStorage.getItem('cart')).id);
+            //  }).then((response) => {
+            //      vm.cartDetails = response.data.result;
+            //      return orderDetailService.addOrderDetail(vm.order.id, JSON.parse(localStorage.getItem('cart')).id, vm.cartDetails);
+            //  }).then((response) => 
+            //  {
+            //     $location.path("/order");
+            //  })
+            //  .catch((error) => 
+            //  {
+            //      console.log(error)
+            //  }
+            //  );
              
          }
     }

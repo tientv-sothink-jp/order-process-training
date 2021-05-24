@@ -41,7 +41,7 @@ namespace OrderManagementSystem.API.Services
         public User Login(string username, string password)
         {
             User user = _userrepository.Get(username);
-            if (user == null || user.Password != StringCiplerHelper.MD5Hash(password))
+            if (user == null || user.Password != password.ToMD5Hash())
             {
                 return null;
             }

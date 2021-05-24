@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace OrderManagementSystem.API.Helpers
 {
-    public static class StringCiplerHelper
+    public static class StringExtension
     {
-        public static string MD5Hash(string input)
+        public static string ToMD5Hash(this string inputText)
         {
-            if(input == "" || input == null)
+            if(inputText == "" || inputText == null)
             {
                 return "";
             }
@@ -17,7 +16,7 @@ namespace OrderManagementSystem.API.Helpers
             {
                 StringBuilder hash = new StringBuilder();
                 MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();
-                byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(input));
+                byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(inputText));
 
                 for (int i = 0; i < bytes.Length; i++)
                 {
@@ -29,7 +28,6 @@ namespace OrderManagementSystem.API.Helpers
             {
                 throw new Exception(ex.Message);
             }
-            
         }
     }
 }

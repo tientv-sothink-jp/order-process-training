@@ -4,6 +4,4 @@
 	,[ProductId] UNIQUEIDENTIFIER NOT NULL
 	,[ProductPrice] DECIMAL NOT NULL
 	,[Quantity] INT NOT NULL
-	,[CreatedTime] DATETIME NULL
-	,[UpdatedTime] DATETIME NULL
 	)

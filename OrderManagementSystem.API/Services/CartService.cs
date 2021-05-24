@@ -19,17 +19,15 @@ namespace OrderManagementSystem.API.Services
     public class CartService : BaseService, ICartService
     {
         private ICartRepository _cartRepository;
-        private IProductRepository _productRepository;
         private ICartDetailRepository _cartDetailRepository;
         private IOrderRepository _orderRepository;
         private IOrderDetailRepository _orderDetailRepository;
-        public CartService(ICartRepository cartRepository, IProductRepository productRepository, ICartDetailRepository cartDetailRepository,
+        public CartService(ICartRepository cartRepository, ICartDetailRepository cartDetailRepository,
             IOrderRepository orderRepository, IIdentityService identityService,
             IOrderDetailRepository orderDetailRepository)
             : base(identityService)
         {
             _cartRepository = cartRepository;
-            _productRepository = productRepository;
             _cartDetailRepository = cartDetailRepository;
             _orderRepository = orderRepository;
             _orderDetailRepository = orderDetailRepository;
@@ -57,13 +55,12 @@ namespace OrderManagementSystem.API.Services
 
         public void Order(string stringCartDetailId)
         {
+            stringCartDetailId = stringCartDetailId.Remove(stringCartDetailId.Length - 1);
             var orderId = _orderRepository.Add(new Order
             {
                 DateDelivered = null,
                 Discount = 0,
-                OrderStatusId = 1,
-                CreatedTime = DateTime.Now,
-                UpdatedTime = DateTime.Now
+                OrderStatusId = 1
             });
 
             var orderDetails = _cartDetailRepository
@@ -73,9 +70,7 @@ namespace OrderManagementSystem.API.Services
                     OrderId = orderId,
                     ProductId = x.ProductId,
                     ProductPrice = x.ProductPrice,
-                    Quantity = x.Quantity,
-                    CreatedTime = DateTime.Now,
-                    UpdatedTime = DateTime.Now
+                    Quantity = x.Quantity
                 })
                 .ToList();
 

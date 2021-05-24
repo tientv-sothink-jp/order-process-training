@@ -54,7 +54,7 @@ namespace OrderManagementSystem.API.Controllers
         {
             _cartService.Delete(id);
         }
-        [HttpPost("Order/{orderId}/cartDetail/{stringCartDetailId}")]
+        [HttpPost("Order/{stringCartDetailId}")]
         public IActionResult Post(string stringCartDetailId)
         {
             _cartService.Order(stringCartDetailId);

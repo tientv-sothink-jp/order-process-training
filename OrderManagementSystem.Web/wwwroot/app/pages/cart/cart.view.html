@@ -14,6 +14,7 @@
         </thead> -->
         <tbody>
           <tr ng-repeat="item in vm.dataSource">
+            <td><input type="checkbox" ng-checked="vm.existSelection(item)" ng-click="vm.toggleSelection(item)"></td>
             <td><img ng-src="{{item.productImageUrl}}" alt=""></td>
             <td>{{item.productName}}</td>
             <td class="text-center">{{item.productPrice | currency:"$"}}</td>
@@ -22,6 +23,7 @@
             <td class="text-center"><button class="btn btn-danger btn-sm" ng-click="vm.remove(item.id)"><i class="fas fa-trash"></i></button></td>
           </tr>
           <tr>
+            <td></td>
             <td></td>
             <td></td>
             <td></td>

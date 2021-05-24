@@ -13,13 +13,6 @@ namespace OrderManagementSystem.API.Services
         List<Product> GetProducts();
         List<Product> GetProductPaging(PagingModel paging);
         List<Product> GetProducts(List<Guid> id);
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="product"></param>
-        /// <param name="quantity"></param>
-        /// <returns>Cart Id</returns>
-        Guid AddToCart(Product product, int quantity);
     }
 
     public class ProductService : BaseService, IProductService
@@ -29,14 +22,6 @@ namespace OrderManagementSystem.API.Services
         public ProductService(IProductRepository productrepository, IIdentityService identityService) : base(identityService)
         {
             _productrepository = productrepository;
-        }
-
-        public Guid AddToCart(Product product, int quantity)
-        {
-            var x = identityService.User;
-            //var y = IdentityService.Name;
-
-            return Guid.NewGuid();
         }
 
         public List<Product> GetProductPaging(PagingModel paging)

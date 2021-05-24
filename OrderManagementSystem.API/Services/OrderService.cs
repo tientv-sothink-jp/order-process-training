@@ -23,12 +23,6 @@ namespace OrderManagementSystem.API.Services
 
         public Guid Add(List<Order> orderItems)
         {
-            foreach(Order item in orderItems)
-            {
-                item.DateDelivered = DateTime.Now;
-                item.UpdatedTime = DateTime.Now;
-                item.CreatedTime = DateTime.Now;
-            }
             return _orderRepository.Add(orderItems);
         }
 
