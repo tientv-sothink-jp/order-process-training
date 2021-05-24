@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="OrderManagementSystem.API.Services.CartService">
+    <Position X="1.25" Y="3.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAMAAAABIEAAAAAAAAAEAAAAAAEAIAACAAAAABAAAAA=</HashCode>
+      <FileName>Services\CartService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OrderManagementSystem.API.Services.CustomAuthenticationService">
+    <Position X="4.75" Y="1.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAEAAACAAAA=</HashCode>
+      <FileName>Services\CustomAuthenticationService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OrderManagementSystem.API.Services.OrderDetailService">
+    <Position X="10.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAABAAAAAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\OrderDetailService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OrderManagementSystem.API.Services.OrderService">
+    <Position X="8.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAABAAAAAAAAAAAAAAAACAAAAABAAAAA=</HashCode>
+      <FileName>Services\OrderService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OrderManagementSystem.API.Services.OrderStatusService">
+    <Position X="10.75" Y="3" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\OrderStatusService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OrderManagementSystem.API.Services.ProductService">
+    <Position X="7.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAEAAAAAAAAAAAAAAAAAAAAAQAAAAAAAACA=</HashCode>
+      <FileName>Services\ProductService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OrderManagementSystem.API.Services.UserService">
+    <Position X="2.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAggAAAAAABAAAAEAAAAAAAAAAAAACAQAAAAAAA=</HashCode>
+      <FileName>Services\UserService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OrderManagementSystem.API.Services.CartDetailService">
+    <Position X="4" Y="4.25" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAACEAAAABAAAAAAAAAAAEAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Services\CartDetailService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
