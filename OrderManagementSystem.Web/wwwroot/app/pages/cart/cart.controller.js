@@ -72,11 +72,9 @@
             vm.getCartInfo();
         }
 
-        function goToCheckoutPage() {vm.selected.toString();
+        function goToCheckoutPage() {
             var stringCartDetail = '';
-            vm.selected.map((x) => {
-                stringCartDetail += x.id + ',';
-            });
+            vm.selected.map(x => x.id).join(",");
             localStorage.setItem('stringCartDetailId', stringCartDetail);
             $location.path("/checkout");
         }
@@ -93,7 +91,7 @@
             } else {
                 vm.selected.push(cartDetailItem);
             }
-            
+
         }
 
         function existSelection(cartDetailItem) {

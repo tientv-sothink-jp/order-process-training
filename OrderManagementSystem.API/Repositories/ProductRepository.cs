@@ -28,7 +28,7 @@ namespace OrderManagementSystem.API.Repositories
             return _orderManagementSystemContext.Products
                 .Skip((paging.PageNumber -1) * paging.PageSize)
                 .Take(paging.PageSize)
-                .ToList<Product>();
+                .ToList();
         }
 
         public List<Product> Get()

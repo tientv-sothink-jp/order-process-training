@@ -25,7 +25,7 @@ namespace OrderManagementSystem.API.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            List<Product> products = _productService.GetProducts();
+            List<Product> products = _productService.Get();
 
             DataReponse.Description = "Lấy dữ liệu danh sách sản phẩm thành công";
             DataReponse.Result = products;
@@ -49,7 +49,7 @@ namespace OrderManagementSystem.API.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(string id)
         {
-            List<Product> products = _productService.GetProducts(id.Split(",").Select(x => Guid.Parse(x)).ToList());
+            List<Product> products = _productService.Get(id.Split(",").Select(x => Guid.Parse(x)).ToList());
 
             DataReponse.Description = "Lấy dữ liệu danh sách sản phẩm thành công";
             DataReponse.Result = products;
