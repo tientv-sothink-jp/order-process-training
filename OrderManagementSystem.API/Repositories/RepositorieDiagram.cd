@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="OrderManagementSystem.API.Repositories.CartDetailRepository">
+    <Position X="3.75" Y="3.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAACAAEAABAAAAgAAAAAAEAAAACAAIAAAAAAAA=</HashCode>
+      <FileName>Repositories\CartDetailRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OrderManagementSystem.API.Repositories.CartRepository">
+    <Position X="3.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAABAAAAgAAAAAAEAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\CartRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OrderManagementSystem.API.Repositories.OrderDetailRepository">
+    <Position X="6.5" Y="3.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\OrderDetailRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OrderManagementSystem.API.Repositories.OrderRepository">
+    <Position X="6.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAABAAAAgAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\OrderRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OrderManagementSystem.API.Repositories.OrderStatusRepository">
+    <Position X="9.5" Y="4.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\OrderStatusRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OrderManagementSystem.API.Repositories.ProductRepository">
+    <Position X="9.5" Y="2.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\ProductRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OrderManagementSystem.API.Repositories.RoleMasterRepository">
+    <Position X="0.5" Y="5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\RoleMasterRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OrderManagementSystem.API.Repositories.UserRepository">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\UserRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OrderManagementSystem.API.Repositories.UserRoleRepository">
+    <Position X="0.5" Y="2.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\UserRoleRepository.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="OrderManagementSystem.API.Repositories.IUserRoleRepository">
+    <Position X="12.75" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\UserRoleRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
