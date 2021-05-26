@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace OrderManagementSystem.API.Controllers
 {
@@ -22,37 +23,46 @@ namespace OrderManagementSystem.API.Controllers
             _productService = productService;
         }
 
+        /// <summary>
+        /// Lấy dữ liệu product
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Get()
         {
-            List<Product> products = _productService.Get();
-
             DataReponse.Description = "Lấy dữ liệu danh sách sản phẩm thành công";
-            DataReponse.Result = products;
+            DataReponse.Result = _productService.Get();
 
             return Ok(DataReponse);
         }
 
         [HttpGet("Paging")]
-        public IActionResult Get([FromQuery] int PageNumber, int MaxPageSize)
+        public IActionResult Get([FromQuery] string keyword, int pageIndex, int pageSize)
         {
-            //DataReponse<List<Product>> dataReponse;
-            ////List<Product> products = _productService.GetProductList(paging);
-            //dataReponse = new DataReponse<List<Product>>
-            //{
-            //    ErrorCode = 200,
-            //    Description = "Lấy dữ liệu danh sách sản phẩm thành công",
-            //};
-            return Ok();
+            var data = _productService.GetProductPaging(keyword, pageIndex, pageSize, out int pageCount);
+
+            DataReponse.Description = "Lấy dữ liệu danh sách sản phẩm thành công";
+            DataReponse.Result = new
+            {
+                Source = data,
+                TotalPage = pageCount
+            };
+            return Ok(DataReponse);
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(string id)
         {
-            List<Product> products = _productService.Get(id.Split(",").Select(x => Guid.Parse(x)).ToList());
-
             DataReponse.Description = "Lấy dữ liệu danh sách sản phẩm thành công";
-            DataReponse.Result = products;
+            DataReponse.Result = _productService.Get();
+            return Ok(DataReponse);
+        }
+        
+        [HttpGet("Search/{keyword}")]
+        public IActionResult Search(string keyword)
+        {
+            DataReponse.Description = "Lấy dữ liệu danh sách sản phẩm thành công";
+            DataReponse.Result = _productService.Searching(keyword);
             return Ok(DataReponse);
         }
     }

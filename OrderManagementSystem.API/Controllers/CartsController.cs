@@ -11,7 +11,7 @@ using System.Text;
 
 namespace OrderManagementSystem.API.Controllers
 {
-    [Authorize(Roles = "Guest")]
+    [Authorize(Roles = "Admin, Guest")]
     [Route("api/[controller]")]
     public class CartsController: BaseApiController
     {
@@ -25,21 +25,18 @@ namespace OrderManagementSystem.API.Controllers
         [HttpGet("{userId}")]
         public IActionResult Get(Guid userId)
         {
-            Cart carts = _cartService.Get(userId);
             DataReponse.Description = "Lấy danh sách giỏ hàng thành công";
-            DataReponse.Result = carts;
+            DataReponse.Result = _cartService.Get(userId);
             return Ok(DataReponse);
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] List<Cart> cartItems)
         {
-            Guid guid = _cartService.Add(cartItems);
-
             DataReponse.Description = "Thêm mới cart thành công";
             DataReponse.Result = new
             {
-                Id = guid
+                Id = _cartService.Add(cartItems)
             };
             return Ok(DataReponse);
         }
@@ -59,7 +56,6 @@ namespace OrderManagementSystem.API.Controllers
         {
             _cartService.Order(stringCartDetailId);
             DataReponse.Description = "Order thành công";
-            DataReponse.Result = new ArrayList();
             return Ok(DataReponse);
         }
     }

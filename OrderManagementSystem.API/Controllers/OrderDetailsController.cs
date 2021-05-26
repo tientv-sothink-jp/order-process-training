@@ -29,9 +29,10 @@ namespace OrderManagementSystem.API.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] List<OrderDetail> orderDetailItems)
+        public IActionResult Post([FromBody] List<OrderDetail> orderDetailItems)
         {
             _orderdetailservice.Add(orderDetailItems);
+            return Ok(DataReponse);
         }
     }
 }

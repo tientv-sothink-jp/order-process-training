@@ -1,27 +1,57 @@
 <div ng-include="'../app/pages/layout/header.view.html'"></div>
 
 <div class="row mt-3">
-    <div class="col-sm-6 col-md-6 col-lg-6">
-        <!-- <span>Tổng số sản phẩm trong giỏ hàng: {{vm.displayOrderQuantity()}}</span> -->
+  <div class="col-sm-6 col-md-6 col-lg-6">
+    <!-- <span>Tổng số sản phẩm trong giỏ hàng: {{vm.displayOrderQuantity()}}</span> -->
+  </div>
+  <div class="col-sm-4 col-md-4 col-lg-4 offset-2">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search..." ng-model="vm.searchInput">
+      <div class="input-group-append">
+        <button class="btn btn-secondary" type="button" ng-click="vm.search()">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4 offset-2">
-        <input type="text" class="form-control form-control-sm" ng-model="vm.searchInput" placeholder="Tìm kiếm...">
-    </div>
+  </div>
 </div>
 <div class="row list-product">
-    <div class="col-sm-6 col-md-6 col-lg-4 mt-3" ng-repeat="item in vm.products | filter: vm.searchInput">
-        <div class="product-item">
-            <div class="product-image">
-                <img ng-src="{{item.imageUrl}}"
-                    alt="">
-            </div>
-            <div class="product-content">
-                <span class="product-name">{{item.name}}</span>
-                <span>Mã sản phẩm: {{item.sku}}</span>
-                <span>Xuất xứ: {{item.origin}}</span>
-                <span>Giá: <strong>{{item.price | currency:"$"}}</strong></span>
-                <button class="btn btn-primary btn-sm mx-auto mt-2" ng-click="vm.AddToCart(item)">Thêm giỏ hàng</button>
-            </div>
-        </div>
+  <div class="col-sm-6 col-md-6 col-lg-4 mt-3" ng-repeat="item in vm.products">
+    <div class="product-item">
+      <div class="product-image">
+        <img ng-src="{{item.imageUrl}}" alt="">
+      </div>
+      <div class="product-content">
+        <span class="product-name">{{item.name}}</span>
+        <span>Mã sản phẩm: {{item.sku}}</span>
+        <span>Xuất xứ: {{item.origin}}</span>
+        <span>Giá: <strong>{{item.price | currency:"$"}}</strong></span>
+        <button class="btn btn-primary btn-sm mx-auto mt-2" ng-click="vm.AddToCart(item)">Thêm giỏ hàng</button>
+      </div>
     </div>
+  </div>
+</div>
+<div class="row product-pagination justify-content-center mt-3">
+  <div class="col-sm-4 col-md-4 col-lg-4">
+    <nav aria-label="...">
+      <ul class="pagination">
+        <li class="page-item" ng-class="{disabled:vm.pageIndex === 1}">
+          <a class="page-link" ng-click="vm.loadProductPage(1)"><<</a>
+        </li>
+        <li class="page-item" ng-class="{disabled:vm.pageIndex === 1}">
+          <a class="page-link" ng-click="vm.loadProductPage(vm.pageIndex - 1)"><</a>
+        </li>
+        <li class="page-item" ng-class="{active: vm.pageIndex == item, disabled: item == '...'}"
+          ng-repeat="item in vm.totalPageArray track by $index">
+          <a class="page-link" ng-click="vm.loadProductPage(item)">{{item}} <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="page-item" ng-class="{disabled:vm.pageIndex === vm.totalPage}">
+          <a class="page-link" ng-click="vm.loadProductPage(vm.pageIndex + 1)">></a>
+        </li>
+        <li class="page-item" ng-class="{disabled:vm.pageIndex === vm.totalPage}">
+          <a class="page-link" ng-click="vm.loadProductPage(vm.totalPage)">>></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </div>

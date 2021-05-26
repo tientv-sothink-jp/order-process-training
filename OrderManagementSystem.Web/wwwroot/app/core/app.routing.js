@@ -22,7 +22,8 @@
             .when("/product", {
                 controller: 'productController',
                 controllerAs: 'vm',
-                templateUrl: "../app/pages/product/product.view.html"
+                templateUrl: "../app/pages/product/product.view.html",
+                // reloadOnSearch: false
             })
             .when("/cart", {
                 controller: 'cartController',

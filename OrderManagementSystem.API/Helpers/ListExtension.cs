@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace OrderManagementSystem.API.Helpers
@@ -16,6 +17,12 @@ namespace OrderManagementSystem.API.Helpers
                 table.Load(reader);
             }
             return table;
+        }
+
+        public static IQueryable<T> Paging<T>(this IQueryable<T> source, int pageIndex, int pageSize, out int pageCount)
+        {
+            pageCount = (int)Math.Ceiling(source.Count() / (double)pageSize);
+            return source.Skip((pageIndex - 1) * pageSize).Take(pageSize);
         }
     }
 }

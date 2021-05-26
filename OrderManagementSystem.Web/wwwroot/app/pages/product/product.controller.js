@@ -5,25 +5,37 @@
         .module('app')
         .controller('productController', productController)
 
-    productController.$inject = ['$location', 'productService', 'cartService', 'cartDetailService'];
+    productController.$inject = ['$location', 'productService', 'cartService', 'cartDetailService', '$routeParams'];
 
-    function productController($location, productService, cartService, cartDetailService) {
+    function productController($location, productService, cartService, cartDetailService, $routeParams) {
         /* jshint validthis:true */
         var vm = this;
+        vm.searchInput;
         vm.products = [];
-        vm.searchInput = '';
+        vm.pageIndex;
+        vm.pageSize;
+        vm.totalPage;
+        vm.totalPageArray = [];
 
         // vm.displayOrderQuantity = cartService.getTotalQuantity;
 
         // Function
         vm.AddToCart = AddToCart;
+        vm.loadProductPage = loadProductPage;
+        vm.loadPage = loadPage;
+        vm.search = search;
 
         activate();
 
         function activate() {
-            productService.getProductList().then(
+            ($routeParams.pageIndex) ? vm.pageIndex = parseInt($routeParams.pageIndex) : vm.pageIndex = 1;
+            ($routeParams.keyword) ? vm.searchInput = $routeParams.keyword : vm.searchInput = '';
+            ($routeParams.pageSize) ? vm.pageSize = parseInt($routeParams.pageSize) : vm.pageSize = 15;
+            productService.getProducts(`/paging?keyword=${decodeURIComponent(vm.searchInput)}&pageIndex=${vm.pageIndex}&pageSize=${vm.pageSize}`).then(
                 (response) => {
-                    vm.products = response.data.result;
+                    vm.products = response.data.result.source;
+                    vm.totalPage = response.data.result.totalPage;
+                    vm.loadPage(vm.pageIndex);
                 },
                 (error) => {
                     console.log(error);
@@ -53,6 +65,37 @@
                     })
                 }
             })
+        }
+
+        function loadProductPage(page) {
+            $location.search({"keyword": vm.searchInput, "pageIndex": page, "pageSize": vm.pageSize});
+
+        }
+
+        function search() {
+            $location.search({"keyword": vm.searchInput, "pageIndex": 1, "pageSize": vm.pageSize});
+        }
+
+        function loadPage(page) {
+            if (page < 1 || page > vm.totalPage)
+                return;
+            vm.totalPageArray = [];
+
+            if (page < 4) {
+                vm.totalPageArray = _.range(1, 6);
+                vm.totalPageArray.push('...');
+            } else if (page + 3 > vm.totalPage) {
+                vm.totalPageArray.push('...');
+                _.range(vm.totalPage - 4, vm.totalPage + 1).forEach(x => {
+                    vm.totalPageArray.push(x);
+                });
+            } else {
+                vm.totalPageArray.push('...');
+                _.range(page - 2, page + 3).forEach(x => {
+                    vm.totalPageArray.push(x);
+                })
+                vm.totalPageArray.push('...');
+            }
         }
     }
 })();

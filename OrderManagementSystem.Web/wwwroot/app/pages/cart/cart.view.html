@@ -14,11 +14,11 @@
         </thead> -->
         <tbody>
           <tr ng-repeat="item in vm.dataSource">
-            <td><input type="checkbox" ng-checked="vm.existSelection(item)" ng-click="vm.toggleSelection(item)"></td>
+            <td><input type="checkbox" ng-model="item.checked"></td>
             <td><img ng-src="{{item.productImageUrl}}" alt=""></td>
             <td>{{item.productName}}</td>
             <td class="text-center">{{item.productPrice | currency:"$"}}</td>
-            <td><input class="form-control form-control-sm text-right" type="number" min="0" ng-model="item.quantity" ng-blur="vm.updateQuantity(item)"></td>
+            <td><input class="form-control form-control-sm text-right" type="number" min="1" ng-model="item.quantity" ng-blur="vm.updateQuantity(item)"></td>
             <td class="text-center">{{item.productPrice * item.quantity  | currency:"$"}}</td>
             <td class="text-center"><button class="btn btn-danger btn-sm" ng-click="vm.remove(item.id)"><i class="fas fa-trash"></i></button></td>
           </tr>
