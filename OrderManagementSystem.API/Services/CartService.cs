@@ -74,7 +74,7 @@ namespace OrderManagementSystem.API.Services
                 .ToList();
 
             _orderDetailRepository.Add(orderDetails);
-            _cartDetailRepository.RemoveCartDetailById(cartDetailIds);
+            _cartDetailRepository.RemoveById(cartDetailIds);
         }
     }
 }

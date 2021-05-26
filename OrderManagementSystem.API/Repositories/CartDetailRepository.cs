@@ -18,7 +18,7 @@ namespace OrderManagementSystem.API.Repositories
         void Add(List<CartDetail> cartDetailItems);
         void Edit(Guid id, List<CartDetail> cartDetailItems);
         void Delete(Guid id);
-        void RemoveCartDetailById(string cartDettails);
+        void RemoveById(string cartDettails);
     }
     public class CartDetailRepository : ICartDetailRepository
     {
@@ -42,7 +42,6 @@ namespace OrderManagementSystem.API.Repositories
             var conn = _orderManagementSystemContext.DbConnection;
 
             conn.Prepare("[dbo].[AddCartDetail]", CommandType.StoredProcedure, new SqlParameter[] { cartDetailTable }).ExecuteNonQuery();
-            conn.Close();
         }
 
         public void Delete(Guid id)
@@ -68,7 +67,6 @@ namespace OrderManagementSystem.API.Repositories
 
             var conn = _orderManagementSystemContext.DbConnection;
             conn.Prepare("[dbo].[EditCartDetail]", CommandType.StoredProcedure, sqlParameters).ExecuteNonQuery();
-            conn.Close();
         }
 
         public List<CartDetail> Get()
@@ -96,12 +94,11 @@ namespace OrderManagementSystem.API.Repositories
             throw new NotImplementedException();
         }
 
-        public void RemoveCartDetailById(string stringCartDetailId)
+        public void RemoveById(string ids)
         {
-            SqlParameter deleteCartDetailByCartId = new SqlParameter("@Id", stringCartDetailId);
-
-            SqlConnection conn = _orderManagementSystemContext.DbConnection;
-            conn.Prepare("[dbo].[DeleteCartDetailById]", CommandType.StoredProcedure, new SqlParameter[] { deleteCartDetailByCartId }).ExecuteNonQuery();
+            var sqlParameter = new SqlParameter("@Id", ids);
+            var conn = _orderManagementSystemContext.DbConnection;
+            conn.Prepare("[dbo].[DeleteCartDetailById]", CommandType.StoredProcedure, new SqlParameter[] { sqlParameter }).ExecuteNonQuery();
         }
     }
 }
