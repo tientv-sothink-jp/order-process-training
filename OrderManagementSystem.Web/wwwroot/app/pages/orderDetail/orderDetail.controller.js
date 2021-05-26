@@ -17,7 +17,7 @@
         function activate() { 
             orderDetailService.getOrderDetail($routeParams.id).then((response) => {
                 vm.orderDetails = response.data.result;
-                return productService.getProducts(vm.orderDetails.map(x => x.productId));
+                return productService.getProductById(vm.orderDetails.map(x => x.productId));
             })
             .then((response) => {
                 vm.products = response.data.result;
