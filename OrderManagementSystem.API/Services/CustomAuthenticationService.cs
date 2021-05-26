@@ -48,8 +48,7 @@ namespace OrderManagementSystem.API.Services
                     expires: DateTime.Now.AddHours(int.Parse(_configuration.GetSection("AppSettings:Expires").Value)),
                     signingCredentials: signingCredentials
                 );
-                string token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                return token;
+                return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
             }
             catch (Exception)
             {
@@ -73,9 +72,8 @@ namespace OrderManagementSystem.API.Services
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            SecurityToken securityToken;
 
-            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
             var jwtSecurityToken = securityToken as JwtSecurityToken;
 
             if(jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))

@@ -1,18 +1,22 @@
 ﻿using OrderManagementSystem.API.Core.Services;
+using OrderManagementSystem.API.Helpers;
 using OrderManagementSystem.API.Models;
 using OrderManagementSystem.API.Repositories;
 using OrderManagementSystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace OrderManagementSystem.API.Services
 {
     public interface IProductService
     {
         List<Product> Get();
-        List<Product> GetPaging(PagingModel paging);
-        List<Product> Get(List<Guid> id);
+        List<Product> GetProductPaging(string searchText, int paginIndex, int pageSize, out int pageCount);
+        List<Product> Get(string id);
+        List<Product> Searching(string keyword);
     }
 
     public class ProductService : BaseService, IProductService
@@ -24,9 +28,9 @@ namespace OrderManagementSystem.API.Services
             _productrepository = productrepository;
         }
 
-        public List<Product> GetPaging(PagingModel paging)
+        public List<Product> GetProductPaging(string searchText, int paginIndex, int pageSize, out int pageCount)
         {
-            return _productrepository.Get(paging);
+            return _productrepository.Pagination(searchText, paginIndex, pageSize, out pageCount);
         }
 
         public List<Product> Get()
@@ -34,9 +38,26 @@ namespace OrderManagementSystem.API.Services
             return _productrepository.Get();
         }
 
-        public List<Product> Get(List<Guid> id)
+        public List<Product> Get(string id)
         {
-            return _productrepository.Get(id);
+            List<Guid> ids = id.Split(",").Select(x => Guid.Parse(x)).ToList();
+            return _productrepository.Get(ids);
+        }
+
+        public List<Product> Searching(string keyword)
+        {
+            keyword = keyword.RemoveVietnameseTones();
+
+            var products = _productrepository.Get();
+            
+            if(!String.IsNullOrEmpty(keyword))
+            {
+                products = products.Where(s => s.Name.RemoveVietnameseTones().Contains(keyword) ||
+                s.Sku.RemoveVietnameseTones().Contains(keyword) ||
+                s.Origin.RemoveVietnameseTones().Contains(keyword))
+                .ToList();
+            }
+            return products;
         }
     }
 }

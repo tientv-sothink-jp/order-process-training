@@ -14,7 +14,7 @@ namespace OrderManagementSystem.API.Services
         Guid Add(List<Cart> cartItems);
         void Edit(Guid id, List<Cart> cartItem);
         void Delete(Guid id);
-        void Order(string stringCartDetailId);
+        void Order(string cartDetailIds);
     }
     public class CartService : BaseService, ICartService
     {
@@ -53,7 +53,7 @@ namespace OrderManagementSystem.API.Services
             _cartRepository.Edit(id, cartItems);
         }
 
-        public void Order(string stringCartDetailId)
+        public void Order(string cartDetailIds)
         {
             var orderId = _orderRepository.Add(new Order
             {
@@ -63,7 +63,7 @@ namespace OrderManagementSystem.API.Services
             });
 
             var orderDetails = _cartDetailRepository
-                .Get(stringCartDetailId.Split(",").ToList())
+                .Get(cartDetailIds.Split(",").ToList())
                 .Select((x) => new OrderDetail
                 {
                     OrderId = orderId,
@@ -74,7 +74,7 @@ namespace OrderManagementSystem.API.Services
                 .ToList();
 
             _orderDetailRepository.Add(orderDetails);
-            _cartDetailRepository.RemoveCartDetailById(stringCartDetailId);
+            _cartDetailRepository.RemoveCartDetailById(cartDetailIds);
         }
     }
 }

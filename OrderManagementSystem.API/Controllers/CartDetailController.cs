@@ -21,7 +21,7 @@ namespace OrderManagementSystem.API.Controllers
             _cartDetailService = cartDetailService;
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public IActionResult Get()
         {
             return Ok();
@@ -36,8 +36,8 @@ namespace OrderManagementSystem.API.Controllers
             return Ok(DataReponse);
         }
 
-        [Authorize(Roles = "Guest")]
-        [HttpPost("")]
+        [Authorize(Roles = "Admin, Guest")]
+        [HttpPost]
         public void Post(List<CartDetail> cartDetailItems)
         {
             _cartDetailService.Add(cartDetailItems);

@@ -52,35 +52,9 @@ namespace OrderManagementSystem.API.Repositories
             }
         }
 
-        //public void Add(Guid cartID, List<OrderDetail> orderdetailItems)
-        //{
-        //    string[] columnNames = { "Id", "OrderId", "ProductId", "ProductPrice", "Quantity" };
-
-            //    var addOrderDetailParameter = new SqlParameter("@OrderDetail", SqlDbType.Structured)
-            //    {
-            //        Value = orderdetailItems.ToDataTable(columnNames),
-            //        TypeName = "dbo.OrderDetailType"
-            //    };
-
-            //    SqlParameter deleteCartDetailByCartIdParameter = new SqlParameter("@CartId", cartID);
-
-            //    SqlConnection conn = _orderManagementSystemContext.DbConnection;
-            //    SqlTransaction transaction = conn.BeginTransaction();
-            //    try
-            //    {
-            //        conn.Prepare("[dbo].[AddOrderDetail]", CommandType.StoredProcedure, new SqlParameter[] { addOrderDetailParameter }, transaction).ExecuteNonQuery();
-            //        conn.Prepare("[dbo].[DeleteCartDetailByCartId]", CommandType.StoredProcedure, new SqlParameter[] { deleteCartDetailByCartIdParameter }, transaction).ExecuteNonQuery();
-            //        transaction.Commit();
-            //    }
-            //    catch (Exception)
-            //    {
-            //        transaction.Rollback();
-            //    }
-            //}
-
-            public List<OrderDetail> Get(Guid orderId)
-        {
+         public List<OrderDetail> Get(Guid orderId)
+         {
             return _orderManagementSystemContext.OrderDetails.Where(x => x.OrderId == orderId).ToList();
-        }
+         }
     }
 }

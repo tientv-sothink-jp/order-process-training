@@ -18,7 +18,6 @@ namespace OrderManagementSystem.API.Repositories
         void Add(List<CartDetail> cartDetailItems);
         void Edit(Guid id, List<CartDetail> cartDetailItems);
         void Delete(Guid id);
-        void RemoveCartDetailsOrdered(List<Guid> cartIdDetails);
         void RemoveCartDetailById(string cartDettails);
     }
     public class CartDetailRepository : ICartDetailRepository
@@ -40,7 +39,7 @@ namespace OrderManagementSystem.API.Repositories
                 TypeName = "dbo.CartDetailType"
             };
 
-            SqlConnection conn = _orderManagementSystemContext.DbConnection;
+            var conn = _orderManagementSystemContext.DbConnection;
 
             conn.Prepare("[dbo].[AddCartDetail]", CommandType.StoredProcedure, new SqlParameter[] { cartDetailTable }).ExecuteNonQuery();
             conn.Close();
@@ -48,14 +47,14 @@ namespace OrderManagementSystem.API.Repositories
 
         public void Delete(Guid id)
         {
-            CartDetail cartDetail = _orderManagementSystemContext.CartDetails.Find(id);
+            var cartDetail = _orderManagementSystemContext.CartDetails.Find(id);
             _orderManagementSystemContext.CartDetails.Remove(cartDetail);
             _orderManagementSystemContext.SaveChanges();
         }
 
         public void Edit(Guid id, List<CartDetail> cartDetailItems)
         {
-            SqlParameter[] sqlParameters = new SqlParameter[]
+            var sqlParameters = new SqlParameter[]
             {
                 new SqlParameter("Id", id),
                 new SqlParameter()
@@ -67,7 +66,7 @@ namespace OrderManagementSystem.API.Repositories
                 }
             };
 
-            SqlConnection conn = _orderManagementSystemContext.DbConnection;
+            var conn = _orderManagementSystemContext.DbConnection;
             conn.Prepare("[dbo].[EditCartDetail]", CommandType.StoredProcedure, sqlParameters).ExecuteNonQuery();
             conn.Close();
         }
@@ -99,15 +98,10 @@ namespace OrderManagementSystem.API.Repositories
 
         public void RemoveCartDetailById(string stringCartDetailId)
         {
-            SqlParameter deleteCartDetailByCartId = new SqlParameter("@id", stringCartDetailId);
+            SqlParameter deleteCartDetailByCartId = new SqlParameter("@Id", stringCartDetailId);
 
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
             conn.Prepare("[dbo].[DeleteCartDetailById]", CommandType.StoredProcedure, new SqlParameter[] { deleteCartDetailByCartId }).ExecuteNonQuery();
-        }
-
-        public void RemoveCartDetailsOrdered(List<Guid> cartIdDetailItems)
-        {
-            //var cartDetails = _orderManagementSystemContext.CartDetails.Where<>
         }
     }
 }

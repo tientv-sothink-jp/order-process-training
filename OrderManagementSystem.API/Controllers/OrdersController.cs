@@ -31,20 +31,19 @@ namespace OrderManagementSystem.API.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] List<Order> orderItems)
         {
-            Guid guid = _orderService.Add(orderItems);
-
             DataReponse.Description = "Thêm mới Order thành công";
             DataReponse.Result = new
             {
-                Id = guid
+                Id = _orderService.Add(orderItems)
             };
             return Ok(DataReponse);
         }
 
         [HttpPut("{id}")]
-        public void Put(Guid id, [FromBody] List<Order> orderItems)
+        public IActionResult Put(Guid id, [FromBody] List<Order> orderItems)
         {
             _orderService.Edit(id, orderItems);
+            return Ok(DataReponse);
         }
     }
 }

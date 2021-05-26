@@ -11,7 +11,6 @@
         /* jshint validthis:true */
         var vm = this;
         vm.dataSource;
-        vm.selected;
 
         // function
         vm.remove = remove;
@@ -19,14 +18,11 @@
         vm.getCartInfo = getCartInfo;
         vm.updateQuantity = updateQuantity;
         vm.goToCheckoutPage = goToCheckoutPage;
-        vm.toggleSelection = toggleSelection;
-        vm.existSelection = existSelection;
 
         activate();
 
         function activate() {
             getCartInfo();
-            vm.selected = [];
         }
 
         function displayTotalPrice() {
@@ -44,7 +40,7 @@
                 .then((response) => {
                     vm.cartDetail = response.data.result;
                     // console.log('cartDetail', vm.cartDetail);
-                    return productService.getProducts(vm.cartDetail.map(x => x.productId));
+                    return productService.getProductById(vm.cartDetail.map(x => x.productId));
                 })
                 .then((response) => {
                     vm.products = response.data.result;
@@ -73,29 +69,22 @@
         }
 
         function goToCheckoutPage() {
-            var stringCartDetail = '';
-            vm.selected.map(x => x.id).join(",");
-            localStorage.setItem('stringCartDetailId', stringCartDetail);
-            $location.path("/checkout");
+            var stringCartDetail = vm.dataSource
+                .filter(x => x.checked)
+                .map(x => x.id)
+                .join(",");
+            if (!stringCartDetail) {
+                $location.path("/cart");
+            } else {
+
+                localStorage.setItem('stringCartDetailId', stringCartDetail);
+                $location.path("/checkout");
+            }
         }
 
         function updateQuantity(cartDetailItem) {
             cartDetailService.updateProduct(cartDetailItem.id, vm.cart.id, cartDetailItem.productId, cartDetailItem.productPrice, cartDetailItem.quantity)
             vm.getCartInfo();
-        }
-
-        function toggleSelection(cartDetailItem) {
-            var index = vm.selected.indexOf(cartDetailItem);
-            if (index > -1) {
-                vm.selected.splice(index, 1);
-            } else {
-                vm.selected.push(cartDetailItem);
-            }
-
-        }
-
-        function existSelection(cartDetailItem) {
-            return vm.selected.indexOf(cartDetailItem) > -1;
         }
     }
 })();

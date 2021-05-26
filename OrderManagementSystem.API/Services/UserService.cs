@@ -62,8 +62,8 @@ namespace OrderManagementSystem.API.Services
 
             var claims = new List<Claim>()
                         {
-                            new Claim(ClaimTypes.Name, user.Name.ToString()),
                             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                            new Claim(ClaimTypes.Name, user.Name.ToString()),
                             new Claim(ClaimTypes.Role, roleMaster.Name),
                             new Claim(ClaimTypes.Email, user.Email),
                             new Claim(CustomClaimTypes.Cart, cartId.ToString()),
