@@ -1,7 +1,5 @@
-﻿using System;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using OrderManagementSystem.Domain.Core;
 using OrderManagementSystem.Domain.Entities;
 
@@ -43,7 +41,7 @@ namespace OrderManagementSystem.Domain.EF
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

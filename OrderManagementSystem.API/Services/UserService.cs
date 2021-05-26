@@ -1,13 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using OrderManagementSystem.API.Core;
 using OrderManagementSystem.API.Helpers;
-using OrderManagementSystem.API.Models;
 using OrderManagementSystem.API.Repositories;
 using OrderManagementSystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
-using System.Text;
 
 namespace OrderManagementSystem.API.Services
 {
@@ -23,7 +21,7 @@ namespace OrderManagementSystem.API.Services
         private IUserRoleRepository _userRoleRepository;
         private IRoleMasterRepository _roleMasterRepository;
         private ICartRepository _cartRepository;
-        public UserService(IUserRepository userRepository, IUserRoleRepository userRoleRepository, 
+        public UserService(IUserRepository userRepository, IUserRoleRepository userRoleRepository,
             IRoleMasterRepository roleMasterRepository, IConfiguration configuration,
             ICartRepository cartRepository) : base(configuration)
         {
@@ -41,22 +39,13 @@ namespace OrderManagementSystem.API.Services
         public User Login(string username, string password)
         {
             User user = _userrepository.Get(username);
-            if (user == null || user.Password != password.ToMD5Hash())
-            {
-                return null;
-            }
+            if (user == null || user.Password != password.ToMD5Hash()) return null;
 
             UserRole userRole = _userRoleRepository.Get(user.Id);
-            if (userRole == null)
-            {
-                return null;
-            }
+            if (userRole == null) return null;
 
             RoleMaster roleMaster = _roleMasterRepository.Get(userRole.RoleId);
-            if (roleMaster == null)
-            {
-                return null;
-            }
+            if (roleMaster == null) return null;
 
             var cartId = _cartRepository.Get(user.Id).Id;
 

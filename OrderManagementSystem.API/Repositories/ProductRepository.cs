@@ -1,11 +1,9 @@
-﻿using OrderManagementSystem.Domain.EF;
+﻿using OrderManagementSystem.API.Helpers;
+using OrderManagementSystem.Domain.EF;
 using OrderManagementSystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Linq;
-using OrderManagementSystem.API.Models;
-using OrderManagementSystem.API.Helpers;
 
 namespace OrderManagementSystem.API.Repositories
 {
@@ -16,7 +14,7 @@ namespace OrderManagementSystem.API.Repositories
         List<Product> GetPagination(string searchText, int pageIndex, int pageSize, out int pageCount);
     }
 
-    public class ProductRepository: IProductRepository
+    public class ProductRepository : IProductRepository
     {
         private readonly OrderManagementSystemContext _orderManagementSystemContext;
         public ProductRepository(OrderManagementSystemContext orderManagementSystem)
@@ -42,24 +40,9 @@ namespace OrderManagementSystem.API.Repositories
                     x.Name.Contains(searchText) ||
                     x.Sku.Contains(searchText) ||
                     x.Origin.Contains(searchText)
-                )) //search here
+                ))
                 .Paging(pageIndex, pageSize, out pageCount)
                 .ToList();
         }
-
-        //public List<Product> Searching(string keyword)
-        //{
-        //    keyword = keyword.RemoveVietnameseTones();
-        //    var products = _orderManagementSystemContext.Products.ToList();
-
-        //    if (!String.IsNullOrEmpty(keyword))
-        //    {
-        //        products = products.Where(s => s.Name.RemoveVietnameseTones().Contains(keyword) || 
-        //        s.Sku.RemoveVietnameseTones().Contains(keyword) || 
-        //        s.Origin.RemoveVietnameseTones().Contains(keyword))
-        //        .ToList();
-        //    }
-        //    return products;
-        //}
     }
 }

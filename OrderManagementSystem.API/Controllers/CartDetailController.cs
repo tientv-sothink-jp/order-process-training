@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrderManagementSystem.API.Core.Controllers;
 using OrderManagementSystem.API.Models;
 using OrderManagementSystem.API.Services;
 using OrderManagementSystem.Domain.Entities;
+using System;
+using System.Collections.Generic;
 
 namespace OrderManagementSystem.API.Controllers
 {

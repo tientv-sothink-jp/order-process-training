@@ -85,15 +85,11 @@
                 vm.totalPageArray = _.range(1, 6);
                 vm.totalPageArray.push('...');
             } else if (page + 3 > vm.totalPage) {
-                vm.totalPageArray.push('...');
-                _.range(vm.totalPage - 4, vm.totalPage + 1).forEach(x => {
-                    vm.totalPageArray.push(x);
-                });
+                vm.totalPageArray = _.range(vm.totalPage - 4, vm.totalPage + 1);
+                vm.totalPageArray.unshift('...');
             } else {
-                vm.totalPageArray.push('...');
-                _.range(page - 2, page + 3).forEach(x => {
-                    vm.totalPageArray.push(x);
-                })
+                vm.totalPageArray = _.range(page - 2, page + 3);
+                vm.totalPageArray.unshift('...');
                 vm.totalPageArray.push('...');
             }
         }

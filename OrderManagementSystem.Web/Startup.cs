@@ -1,26 +1,21 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using OrderManagementSystem.API.Core.Middleware;
+using OrderManagementSystem.API.Core.Services;
 using OrderManagementSystem.API.Repositories;
 using OrderManagementSystem.API.Services;
 using OrderManagementSystem.Domain.EF;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
-using OrderManagementSystem.API.Core.Middleware;
-using OrderManagementSystem.API.Core.Services;
 
 namespace OrderManagementSystem.Web
 {
@@ -175,7 +170,7 @@ namespace OrderManagementSystem.Web
                 endpoints.MapControllerRoute(
                     "default",
                     "{controller=Home}/{action=Main}/{id?}",
-                    new{}
+                    new { }
                 );
             });
         }

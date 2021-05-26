@@ -8,26 +8,18 @@ namespace OrderManagementSystem.API.Helpers
     {
         public static string ToMD5Hash(this string inputText)
         {
-            if(inputText == "" || inputText == null)
-            {
-                return "";
-            }
-            try
-            {
-                StringBuilder hash = new StringBuilder();
-                MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();
-                byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(inputText));
+            if (string.IsNullOrEmpty(inputText)) return "";
 
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    hash.Append(bytes[i].ToString("x2"));
-                }
-                return hash.ToString();
-            }
-            catch (Exception ex)
+            StringBuilder hash = new StringBuilder();
+            MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();
+            byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(inputText));
+
+            for (int i = 0; i < bytes.Length; i++)
             {
-                throw new Exception(ex.Message);
+                hash.Append(bytes[i].ToString("x2"));
             }
+            
+            return hash.ToString();
         }
 
         public static string RemoveVietnameseTones(this string inputText)
@@ -52,9 +44,9 @@ namespace OrderManagementSystem.API.Helpers
                 "ýỳỵỷỹ",
                 "ÝỲỴỶỸ"
             };
-            for(int i = 1; i < vietnameseChar.Length; i++)
+            for (int i = 1; i < vietnameseChar.Length; i++)
             {
-                for(int j = 0; j < vietnameseChar[i].Length; j++)
+                for (int j = 0; j < vietnameseChar[i].Length; j++)
                 {
                     inputText = inputText.Replace(vietnameseChar[i][j], vietnameseChar[0][i - 1]);
                 }

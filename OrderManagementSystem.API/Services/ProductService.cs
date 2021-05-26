@@ -1,13 +1,10 @@
 ﻿using OrderManagementSystem.API.Core.Services;
 using OrderManagementSystem.API.Helpers;
-using OrderManagementSystem.API.Models;
 using OrderManagementSystem.API.Repositories;
 using OrderManagementSystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderManagementSystem.API.Services
 {
@@ -49,8 +46,8 @@ namespace OrderManagementSystem.API.Services
             keyword = keyword.RemoveVietnameseTones();
 
             var products = _productrepository.Get();
-            
-            if(!String.IsNullOrEmpty(keyword))
+
+            if (!String.IsNullOrEmpty(keyword))
             {
                 products = products.Where(s => s.Name.RemoveVietnameseTones().Contains(keyword) ||
                 s.Sku.RemoveVietnameseTones().Contains(keyword) ||

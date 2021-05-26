@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OrderManagementSystem.API.Models
+﻿namespace OrderManagementSystem.API.Models
 {
     public class DataReponse
     {

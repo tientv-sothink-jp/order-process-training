@@ -10,7 +10,7 @@ namespace OrderManagementSystem.API.Repositories
         UserRole Get(Guid userId);
     }
 
-    public class UserRoleRepository: IUserRoleRepository
+    public class UserRoleRepository : IUserRoleRepository
     {
         private readonly OrderManagementSystemContext _orderManagementSystemContext;
         public UserRoleRepository(OrderManagementSystemContext orderManagementSystem)

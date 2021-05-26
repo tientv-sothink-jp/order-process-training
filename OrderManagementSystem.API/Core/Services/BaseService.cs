@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OrderManagementSystem.API.Core.Services
+﻿namespace OrderManagementSystem.API.Core.Services
 {
     public class BaseService
     {

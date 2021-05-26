@@ -1,6 +1,4 @@
-﻿using FastMember;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
 using OrderManagementSystem.API.Helpers;
 using OrderManagementSystem.Domain.EF;
 using OrderManagementSystem.Domain.Entities;
@@ -8,20 +6,19 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 
 namespace OrderManagementSystem.API.Repositories
 {
     public interface ICartRepository
     {
         Cart Get(Guid userId);
- 
+
         Guid Add(List<Cart> cartItems);
         void Edit(Guid id, List<Cart> cartItem);
         void Delete(Guid id);
     }
 
-    public class CartRepository: ICartRepository
+    public class CartRepository : ICartRepository
     {
         private OrderManagementSystemContext _orderManagementSystemContext;
 
@@ -64,7 +61,7 @@ namespace OrderManagementSystem.API.Repositories
 
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
 
-            var result = conn.Prepare("[dbo].[AddCart]", CommandType.StoredProcedure, new SqlParameter[] { parameter}).ExecuteScalar();
+            var result = conn.Prepare("[dbo].[AddCart]", CommandType.StoredProcedure, new SqlParameter[] { parameter }).ExecuteScalar();
             return Guid.Parse(result.ToString());
         }
 

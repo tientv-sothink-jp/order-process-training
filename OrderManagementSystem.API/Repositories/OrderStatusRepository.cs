@@ -1,9 +1,7 @@
 ﻿using OrderManagementSystem.Domain.EF;
 using OrderManagementSystem.Domain.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace OrderManagementSystem.API.Repositories
 {
@@ -11,7 +9,7 @@ namespace OrderManagementSystem.API.Repositories
     {
         List<OrderStatusMaster> Get();
     }
-    public class OrderStatusRepository: IOrderStatusRepository
+    public class OrderStatusRepository : IOrderStatusRepository
     {
         private OrderManagementSystemContext _orderManagementSystemContext;
 
