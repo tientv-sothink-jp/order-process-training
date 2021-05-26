@@ -30,9 +30,5 @@
             return $http.get(
                 `api/Products/${encodeURIComponent(id)}`, headerRequest);
          }
-
-        //  function searchProduct(keyword, pageIndex, pageSize) {
-        //      return $http.get(`api/Products/Paging?keyword=${keyword}&pageIndex=${pageIndex}&pageSize=${pageSize}`, headerRequest);
-        //  }
     }
 })();

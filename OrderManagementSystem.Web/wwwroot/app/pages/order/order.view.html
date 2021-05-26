@@ -1,24 +1,28 @@
 ﻿<div ng-include="'../app/pages/layout/header.view.html'"></div>
 
 <div class="order-list mt-3">
-    <table class="table table-bordered">
-        <thead class="text-center">
-          <tr>
-            <th scope="col">Mã đơn hàng</th>
-            <th scope="col">Giảm giá</th>
-            <th scope="col">Trạng thái</th>
-            <th scope="col">Ngày đặt</th>
-            <th>Ngày giao hàng</th>
-          </tr>
-        </thead>
-        <tbody class="text-center">
-          <tr ng-repeat="item in vm.dataSource" ng-dblclick="vm.goToOrderDetailPage(item.id)">
-              <td>{{item.id}}</td>
-              <td>{{item.discount}}</td>
-              <td>{{item.orderStatusName}}</td>
-              <td>{{item.createdTime}}</td>
-              <td>{{item.dateDelivered}}</td>
-          </tr>
-        </tbody>
-      </table>
+  <table class="table table-bordered">
+    <thead class="text-center">
+      <tr>
+        <th scope="col">Mã đơn hàng</th>
+        <th scope="col">Giảm giá</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col">Ngày đặt</th>
+        <th>Ngày giao hàng</th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+      <tr ng-repeat="item in vm.orders" ng-dblclick="vm.goToOrderDetailPage(item.id)">
+        <td>{{item.id}}</td>
+        <td>{{item.discount}}</td>
+        <td>
+          <select class="form-control form-control-sm" ng-model="item.orderStatusId" ng-change="vm.changeOrderStatus(item)">
+            <option ng-repeat="option in vm.orderStatus" ng-value="option.id"> {{option.name}} </option>
+          </select>
+        </td>
+        <td>{{item.createdTime}}</td>
+        <td>{{item.dateDelivered}}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
