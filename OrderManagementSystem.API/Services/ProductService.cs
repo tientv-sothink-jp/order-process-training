@@ -30,7 +30,7 @@ namespace OrderManagementSystem.API.Services
 
         public List<Product> GetProductPaging(string searchText, int paginIndex, int pageSize, out int pageCount)
         {
-            return _productrepository.Pagination(searchText, paginIndex, pageSize, out pageCount);
+            return _productrepository.GetPagination(searchText, paginIndex, pageSize, out pageCount);
         }
 
         public List<Product> Get()

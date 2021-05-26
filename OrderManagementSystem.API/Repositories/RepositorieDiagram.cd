@@ -2,14 +2,20 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="OrderManagementSystem.API.Repositories.CartDetailRepository">
     <Position X="3.75" Y="3.25" Width="2.5" />
+    <Members>
+      <Method Name="CartDetailRepository" Hidden="true" />
+    </Members>
     <TypeIdentifier>
-      <HashCode>AAIAAAAACAAEAABAAAAgAAAAAAEAAAACAAIAAAAAAAA=</HashCode>
+      <HashCode>AAIAAAAACAAAAgBAAAAgAAAAAAEAAAACAAAAAAAAAAA=</HashCode>
       <FileName>Repositories\CartDetailRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="OrderManagementSystem.API.Repositories.CartRepository">
     <Position X="3.75" Y="0.5" Width="2.5" />
+    <Members>
+      <Method Name="CartRepository" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAABAAAAgAAAAAAEAAAACAAAAAAAAAAA=</HashCode>
       <FileName>Repositories\CartRepository.cs</FileName>
@@ -18,6 +24,9 @@
   </Class>
   <Class Name="OrderManagementSystem.API.Repositories.OrderDetailRepository">
     <Position X="6.5" Y="3.25" Width="2.5" />
+    <Members>
+      <Method Name="OrderDetailRepository" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Repositories\OrderDetailRepository.cs</FileName>
@@ -26,6 +35,9 @@
   </Class>
   <Class Name="OrderManagementSystem.API.Repositories.OrderRepository">
     <Position X="6.5" Y="0.5" Width="2.5" />
+    <Members>
+      <Method Name="OrderRepository" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAABAAAAgAAAAAAAAAAACAAAAAAAAAAA=</HashCode>
       <FileName>Repositories\OrderRepository.cs</FileName>
@@ -34,6 +46,9 @@
   </Class>
   <Class Name="OrderManagementSystem.API.Repositories.OrderStatusRepository">
     <Position X="9.5" Y="4.5" Width="2.5" />
+    <Members>
+      <Method Name="OrderStatusRepository" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Repositories\OrderStatusRepository.cs</FileName>
@@ -41,15 +56,21 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="OrderManagementSystem.API.Repositories.ProductRepository">
-    <Position X="9.5" Y="2.25" Width="2.5" />
+    <Position X="9.5" Y="1.5" Width="2.5" />
+    <Members>
+      <Method Name="ProductRepository" Hidden="true" />
+    </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
       <FileName>Repositories\ProductRepository.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="OrderManagementSystem.API.Repositories.RoleMasterRepository">
     <Position X="0.5" Y="5" Width="2.5" />
+    <Members>
+      <Method Name="RoleMasterRepository" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Repositories\RoleMasterRepository.cs</FileName>
@@ -58,6 +79,9 @@
   </Class>
   <Class Name="OrderManagementSystem.API.Repositories.UserRepository">
     <Position X="0.5" Y="0.5" Width="2.5" />
+    <Members>
+      <Method Name="UserRepository" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Repositories\UserRepository.cs</FileName>
@@ -66,6 +90,9 @@
   </Class>
   <Class Name="OrderManagementSystem.API.Repositories.UserRoleRepository">
     <Position X="0.5" Y="2.75" Width="2.5" />
+    <Members>
+      <Method Name="UserRoleRepository" Hidden="true" />
+    </Members>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAABAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Repositories\UserRoleRepository.cs</FileName>

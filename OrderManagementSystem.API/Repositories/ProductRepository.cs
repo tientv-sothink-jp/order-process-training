@@ -13,7 +13,7 @@ namespace OrderManagementSystem.API.Repositories
     {
         List<Product> Get(List<Guid> id);
         List<Product> Get();
-        List<Product> Pagination(string searchText, int pageIndex, int pageSize, out int pageCount);
+        List<Product> GetPagination(string searchText, int pageIndex, int pageSize, out int pageCount);
     }
 
     public class ProductRepository: IProductRepository
@@ -34,18 +34,7 @@ namespace OrderManagementSystem.API.Repositories
             return _orderManagementSystemContext.Products.Where(x => id.Contains(x.Id)).ToList();
         }
 
-        public void Pagination(int pageIndex, int pageSize, out int pageCount)
-        {
-            var query = _orderManagementSystemContext.Products.AsQueryable();
-
-            pageCount = query.Count();
-
-            // Paganation -- todo;
-
-            // reutnr
-        }
-
-        List<Product> IProductRepository.Pagination(string searchText, int pageIndex, int pageSize, out int pageCount)
+        public List<Product> GetPagination(string searchText, int pageIndex, int pageSize, out int pageCount)
         {
             return _orderManagementSystemContext.Products
                 .AsQueryable()

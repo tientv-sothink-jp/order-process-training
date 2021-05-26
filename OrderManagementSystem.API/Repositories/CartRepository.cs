@@ -85,7 +85,6 @@ namespace OrderManagementSystem.API.Repositories
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
 
             conn.Prepare("[dbo].[EditCart]", CommandType.StoredProcedure, sqlParameters).ExecuteNonQuery();
-            conn.Close();
         }
     }
 }
