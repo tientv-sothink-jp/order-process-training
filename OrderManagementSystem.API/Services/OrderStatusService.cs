@@ -1,8 +1,6 @@
 ﻿using OrderManagementSystem.API.Repositories;
 using OrderManagementSystem.Domain.Entities;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace OrderManagementSystem.API.Services
 {
@@ -10,7 +8,7 @@ namespace OrderManagementSystem.API.Services
     {
         List<OrderStatusMaster> Get();
     }
-    public class OrderStatusService: IOrderStatusService
+    public class OrderStatusService : IOrderStatusService
     {
         private IOrderStatusRepository _orderStatusRepository;
 

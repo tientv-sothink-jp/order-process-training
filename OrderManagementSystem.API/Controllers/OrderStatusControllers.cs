@@ -2,16 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using OrderManagementSystem.API.Core.Controllers;
 using OrderManagementSystem.API.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OrderManagementSystem.API.Controllers
 {
     [Authorize(Roles = "Admin, Guest")]
     [Route("api/[controller]")]
     [ApiController]
-    public class OrderStatusController: BaseApiController
+    public class OrderStatusController : BaseApiController
     {
         private IOrderStatusService _orderStatusService;
 

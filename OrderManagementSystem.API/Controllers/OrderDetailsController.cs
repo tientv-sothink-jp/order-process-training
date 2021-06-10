@@ -5,13 +5,12 @@ using OrderManagementSystem.API.Services;
 using OrderManagementSystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace OrderManagementSystem.API.Controllers
 {
     [Authorize(Roles = "Admin, Guest")]
     [Route("api/[controller]")]
-    public class OrderDetailsController: BaseApiController
+    public class OrderDetailsController : BaseApiController
     {
         private readonly IOrderDetailService _orderdetailservice;
 

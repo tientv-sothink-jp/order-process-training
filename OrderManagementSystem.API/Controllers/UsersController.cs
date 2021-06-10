@@ -1,25 +1,22 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrderManagementSystem.API.Core.Controllers;
-using OrderManagementSystem.API.Helpers;
 using OrderManagementSystem.API.Models;
 using OrderManagementSystem.API.Services;
 using OrderManagementSystem.Domain.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OrderManagementSystem.API.Controllers
 {
     [Route("api/[controller]")]
-    public class UsersController: BaseApiController
+    public class UsersController : BaseApiController
     {
         private IUserService _userService;
         public UsersController(IUserService userService)
         {
             _userService = userService;
         }
-        
+
         [AllowAnonymous]
         [HttpPost("Login")]
         public IActionResult Login([FromBody] UserLoginRequest request)
@@ -42,7 +39,7 @@ namespace OrderManagementSystem.API.Controllers
                 DataReponse.Description = "Đăng nhập thất bại";
                 DataReponse.Result = null;
                 return Unauthorized(DataReponse);
-            }    
+            }
             return Ok(DataReponse);
         }
 

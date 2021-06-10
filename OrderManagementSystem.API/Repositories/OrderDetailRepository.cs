@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 
 namespace OrderManagementSystem.API.Repositories
 {
@@ -15,7 +14,7 @@ namespace OrderManagementSystem.API.Repositories
         List<OrderDetail> Get(Guid orderId);
         void Add(List<OrderDetail> orderdetailItems);
     }
-    public class OrderDetailRepository: IOrderDetailRepository
+    public class OrderDetailRepository : IOrderDetailRepository
     {
         private readonly OrderManagementSystemContext _orderManagementSystemContext;
 
@@ -37,13 +36,13 @@ namespace OrderManagementSystem.API.Repositories
                         TypeName = "dbo.OrderDetailType"
                     }
                 };
-            
+
 
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
             SqlTransaction transaction = conn.BeginTransaction();
             try
             {
-                conn.Prepare("[dbo].[AddOrderDetail]", CommandType.StoredProcedure, addOrderDetailParameter , transaction).ExecuteNonQuery();
+                conn.Prepare("[dbo].[AddOrderDetail]", CommandType.StoredProcedure, addOrderDetailParameter, transaction).ExecuteNonQuery();
                 transaction.Commit();
             }
             catch (Exception)
@@ -52,9 +51,9 @@ namespace OrderManagementSystem.API.Repositories
             }
         }
 
-         public List<OrderDetail> Get(Guid orderId)
-         {
+        public List<OrderDetail> Get(Guid orderId)
+        {
             return _orderManagementSystemContext.OrderDetails.Where(x => x.OrderId == orderId).ToList();
-         }
+        }
     }
 }

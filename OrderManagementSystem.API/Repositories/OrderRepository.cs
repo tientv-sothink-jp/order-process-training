@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
 
 namespace OrderManagementSystem.API.Repositories
 {
@@ -17,7 +16,7 @@ namespace OrderManagementSystem.API.Repositories
         Guid Add(Order item);
         void Edit(Guid id, List<Order> orderItems);
     }
-    public class OrderRepository: IOrderRepository
+    public class OrderRepository : IOrderRepository
     {
         private OrderManagementSystemContext _orderManagementSystemContext;
 
@@ -32,13 +31,13 @@ namespace OrderManagementSystem.API.Repositories
             {
                 ParameterName = "@Order",
                 SqlDbType = SqlDbType.Structured,
-                Value = orderItems.ToDataTable("Id", "DateDelivered", "Discount", "OrderStatusId" ),
+                Value = orderItems.ToDataTable("Id", "DateDelivered", "Discount", "OrderStatusId"),
                 TypeName = "dbo.OrderType"
             };
 
             SqlConnection conn = _orderManagementSystemContext.DbConnection;
             var result = conn.Prepare("[dbo].[AddOrder]", CommandType.StoredProcedure, new SqlParameter[] { parameter }).ExecuteScalar();
-            
+
             return Guid.Parse(result.ToString());
         }
 

@@ -5,15 +5,13 @@ using OrderManagementSystem.API.Models;
 using OrderManagementSystem.API.Services;
 using OrderManagementSystem.Domain.Entities;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
 namespace OrderManagementSystem.API.Controllers
 {
     [Authorize(Roles = "Admin, Guest")]
     [Route("api/[controller]")]
-    public class CartsController: BaseApiController
+    public class CartsController : BaseApiController
     {
         private ICartService _cartService;
 
